@@ -8,7 +8,9 @@
 #pragma once
 
 #include "cocos2d.h"
-#include "CollisionDetector.hpp"
+#include <memory>
+
+class CollisionDetector;
 
 class MainScene : public cocos2d::Scene
 {
@@ -19,5 +21,5 @@ public:
     void update(float delta) override;
 
 private:
-    CollisionDetector m_collisionDetector;
+    std::shared_ptr<CollisionDetector> m_collisionDetector;
 };

@@ -6,6 +6,7 @@
 //
 
 #include "SimpleTarget.hpp"
+#include "Bullet.hpp"
 
 USING_NS_CC;
 
@@ -51,18 +52,30 @@ Rect SimpleTarget::getCollisionBox() const
 void SimpleTarget::onCollide(PhysicsBody* collideBody)
 {
     if (auto collideTarget = dynamic_cast<SimpleTarget*>(collideBody)) {
-        if (getPositionY() > collideTarget->getPositionY() && getVelocity().y < 0) {
-            changeMovingDirection();
-            if (collideTarget->getVelocity().y > 0) {
-                collideTarget->changeMovingDirection();
-            }
-        } else if (getPositionY() < collideTarget->getPositionY() && getVelocity().y > 0) {
-            changeMovingDirection();
-            if (collideTarget->getVelocity().y < 0) {
-                collideTarget->changeMovingDirection();
-            }
+        onCollide(collideTarget);
+    } else if (auto bullet = dynamic_cast<Bullet*>(collideBody)) {
+        onCollide(bullet);
+    }
+}
+
+void SimpleTarget::onCollide(SimpleTarget* collideTarget)
+{
+    if (getPositionY() > collideTarget->getPositionY() && getVelocity().y < 0) {
+        changeMovingDirection();
+        if (collideTarget->getVelocity().y > 0) {
+            collideTarget->changeMovingDirection();
+        }
+    } else if (getPositionY() < collideTarget->getPositionY() && getVelocity().y > 0) {
+        changeMovingDirection();
+        if (collideTarget->getVelocity().y < 0) {
+            collideTarget->changeMovingDirection();
         }
     }
+}
+
+void SimpleTarget::onCollide(Bullet* bullet)
+{
+    removeFromParent();
 }
 
 void SimpleTarget::changeMovingDirection()

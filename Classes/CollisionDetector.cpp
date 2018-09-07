@@ -7,6 +7,11 @@
 
 #include "CollisionDetector.hpp"
 
+CollisionDetector::CollisionDetector(cocos2d::Node* worldNode) : m_worldNode(worldNode)
+{
+
+}
+
 void CollisionDetector::registerBody(PhysicsBody* body)
 {
     m_bodies.pushBack(body);
@@ -16,9 +21,21 @@ void CollisionDetector::update(float delta)
 {
     for (int i = 0; i < m_bodies.size() - 1; ++i) {
         for (int j = i + 1; j < m_bodies.size(); ++j) {
-            if (m_bodies.at(i)->getCollisionBox().intersectsRect(m_bodies.at(j)->getCollisionBox())) {
-                m_bodies.at(i)->onCollide(m_bodies.at(j));
-                m_bodies.at(j)->onCollide(m_bodies.at(i));
+            const auto firstBody = m_bodies.at(i);
+            const auto secondBody = m_bodies.at(j);
+            if (!firstBody->getParent() || !secondBody->getParent())
+                continue;
+
+            const auto firstWorldCollisionBox = cocos2d::Rect(
+                firstBody->getParent()->convertToWorldSpace(firstBody->getCollisionBox().origin),
+                firstBody->getCollisionBox().size);
+            const auto secondWorldCollisionBox = cocos2d::Rect(
+                secondBody->getParent()->convertToWorldSpace(secondBody->getCollisionBox().origin),
+                secondBody->getCollisionBox().size);
+
+            if (firstWorldCollisionBox.intersectsRect(secondWorldCollisionBox)) {
+                firstBody->onCollide(secondBody);
+                secondBody->onCollide(firstBody);
             }
         }
     }

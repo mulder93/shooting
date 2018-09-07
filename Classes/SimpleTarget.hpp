@@ -9,6 +9,8 @@
 
 #include "PhysicsBody.hpp"
 
+class Bullet;
+
 class SimpleTarget : public PhysicsBody
 {
 public:
@@ -22,5 +24,8 @@ public:
     void onCollide(PhysicsBody* collideBody) override;
 
 private:
+    void onCollide(SimpleTarget* collideTarget);
+    void onCollide(Bullet* bullet);
+
     void changeMovingDirection();
 };
