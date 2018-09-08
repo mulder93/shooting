@@ -19,6 +19,7 @@ public:
 
     void update(float delta) override;
     bool onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *event) override;
+    void onTouchMoved(cocos2d::Touch *touch, cocos2d::Event *event) override;
 
 private:
     void startGame();

@@ -58,5 +58,6 @@ void Pistol::shoot()
 
 void Pistol::reset()
 {
+    setRotation(0.0f);
     // TODO: remove all bullets
 }

@@ -1,6 +1,6 @@
 //
 //  MainScene.hpp
-//  shooting-mobile
+//  shooting
 //
 //  Created by Boris Tsarev on 02/09/2018.
 //

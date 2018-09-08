@@ -5,16 +5,27 @@
 //  Created by Boris Tsarev on 02/09/2018.
 //
 
-#include "cocos2d.h"
+#include "PhysicsBody.hpp"
 
 #pragma once
 
-class Target : public cocos2d::Node
+class Bullet;
+
+class Target : public PhysicsBody
 {
 public:
-    CREATE_FUNC(Target);
+    using HitHandler = std::function<void(bool killed, int points)>;
+
     bool init() override;
+    void onCollide(PhysicsBody* collideBody) override;
+
+    void setHitHandler(HitHandler handler) { m_hitHandler = std::move(handler); }
 
 private:
+    void onCollide(Bullet* bullet);
 
+    virtual int getHitPoints() = 0;
+    virtual int getKillPoints() = 0;
+
+    HitHandler m_hitHandler;
 };

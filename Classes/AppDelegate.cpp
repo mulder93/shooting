@@ -1,3 +1,10 @@
+//
+//  AppDelegate.cpp
+//  shooting
+//
+//  Created by Boris Tsarev on 02/09/2018.
+//
+
 #include "AppDelegate.h"
 #include "MainScene.hpp"
 

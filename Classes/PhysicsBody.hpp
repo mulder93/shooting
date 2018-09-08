@@ -23,7 +23,7 @@ public:
     const cocos2d::Vec2& getAcceleration() { return m_acceleration; }
     void setAcceleration(cocos2d::Vec2 acceleration) { m_acceleration = std::move(acceleration); }
 
-    virtual cocos2d::Rect getCollisionBox() const = 0;
+    virtual cocos2d::Rect getCollisionBox() const { return getBoundingBox(); }
 
     virtual void onCollide(PhysicsBody* collideBody) {}
 

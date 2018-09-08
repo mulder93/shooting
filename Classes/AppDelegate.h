@@ -1,8 +1,15 @@
+//
+//  AppDelegate.h
+//  shooting
+//
+//  Created by Boris Tsarev on 02/09/2018.
+//
+
 #pragma once
 
 #include "cocos2d.h"
 
-class  AppDelegate : private cocos2d::Application
+class AppDelegate : private cocos2d::Application
 {
 public:
     AppDelegate();

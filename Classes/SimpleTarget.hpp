@@ -8,15 +8,11 @@
 #pragma once
 
 #include <functional>
-#include "PhysicsBody.hpp"
+#include "Target.hpp"
 
-class Bullet;
-
-class SimpleTarget : public PhysicsBody
+class SimpleTarget : public Target
 {
 public:
-    using HitHandler = std::function<void(int points)>;
-
     CREATE_FUNC(SimpleTarget);
     bool init() override;
     ~SimpleTarget();
@@ -26,13 +22,11 @@ public:
     cocos2d::Rect getCollisionBox() const override;
     void onCollide(PhysicsBody* collideBody) override;
 
-    void setHitHandler(HitHandler handler) { m_hitHandler = std::move(handler); }
-
 private:
     void onCollide(SimpleTarget* collideTarget);
-    void onCollide(Bullet* bullet);
+
+    int getHitPoints() override { return 0; }
+    int getKillPoints() override { return 10; }
 
     void changeMovingDirection();
-
-    HitHandler m_hitHandler;
 };

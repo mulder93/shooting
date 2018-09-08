@@ -9,6 +9,7 @@
 #include "SimpleTarget.hpp"
 #include "Pistol.hpp"
 #include "CollisionDetector.hpp"
+#include "FastTarget.hpp"
 
 USING_NS_CC;
 
@@ -77,7 +78,10 @@ bool GameLayer::init()
     m_collisionDetector = std::make_shared<CollisionDetector>(this);
 
     addChild(createBackground());
-    
+
+    m_pistol = createPistol();
+    addChild(m_pistol);
+
     m_targetsHolder = createTargetsHolder();
     addChild(m_targetsHolder);
 
@@ -90,9 +94,6 @@ bool GameLayer::init()
     m_resultLabel = createResultLabel();
     addChild(m_resultLabel);
 
-    m_pistol = createPistol();
-    addChild(m_pistol);
-
     startGame();
 
     return true;
@@ -103,7 +104,7 @@ void GameLayer::startGame()
     m_score = 0;
     updateScoreLabel();
 
-    m_timeLeft = 5.0f;
+    m_timeLeft = 15.0f;
     updateTimerLabel();
 
     m_pistol->reset();
@@ -115,6 +116,7 @@ void GameLayer::startGame()
 
 void GameLayer::endGame()
 {
+    m_targetsHolder->unscheduleAllCallbacks();
     m_playing = false;
     showResults();
 }
@@ -122,11 +124,10 @@ void GameLayer::endGame()
 Pistol* GameLayer::createPistol()
 {
     const auto pistol = Pistol::create(m_collisionDetector);
-    pistol->setAnchorPoint({0.5f, 0.5f});
-    pistol->setRotation(20.0f);
+    pistol->setAnchorPoint({0.8f, 0.5f});
 
     const auto screenSize = Director::getInstance()->getVisibleSize();
-    pistol->setPosition({screenSize.width - 60.0f, screenSize.height * 0.5f});
+    pistol->setPosition({screenSize.width - 20.0f, screenSize.height * 0.5f});
 
     return pistol;
 }
@@ -137,17 +138,33 @@ void GameLayer::resetTargets()
     
     for (auto i = 0; i < 15; ++i) {
         const auto target = SimpleTarget::create();
-        target->setHitHandler([this](int points) {
+        target->setHitHandler([this](bool killed, int points) {
             m_score += points;
             updateScoreLabel();
 
-            if (m_targetsHolder->getChildrenCount() == 0) {
-                endGame();
-            }
+//            if (m_targetsHolder->getChildrenCount() == 0) {
+//                endGame();
+//            }
         });
 
         m_targetsHolder->addChild(target);
         m_collisionDetector->registerBody(target);
+    }
+
+    for (auto i = 0; i < 5; ++i) {
+        m_targetsHolder->scheduleOnce([this](float) {
+            const auto target = FastTarget::create();
+            target->setHitHandler([this](bool killed, int points) {
+                m_score += points;
+                updateScoreLabel();
+
+//                if (m_targetsHolder->getChildrenCount() == 0) {
+//                    endGame();
+//                }
+            });
+            m_targetsHolder->addChild(target);
+            m_collisionDetector->registerBody(target);
+        }, random(0.0f, m_timeLeft - 2.0f), std::string("fast_target") + std::to_string(i));
     }
 }
 
@@ -189,4 +206,14 @@ bool GameLayer::onTouchBegan(Touch *touch, Event *event)
     }
 
     return true;
+}
+
+void GameLayer::onTouchMoved(cocos2d::Touch *touch, cocos2d::Event *event)
+{
+    if (!m_playing)
+        return;
+
+    const auto angleDiff = (touch->getLocation().y - touch->getPreviousLocation().y) * 1.5f;
+    const auto newAngle = std::max(-60.0f, std::min(60.0f, m_pistol->getRotation() + angleDiff));
+    m_pistol->setRotation(newAngle);
 }

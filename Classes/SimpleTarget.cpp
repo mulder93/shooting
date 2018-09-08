@@ -10,17 +10,12 @@
 
 USING_NS_CC;
 
-namespace
-{
-    constexpr auto hitPoints = 10;
-}
-
 bool SimpleTarget::init()
 {
-    if (!PhysicsBody::init())
+    if (!Target::init())
         return false;
 
-    const auto fly = Sprite::create("fly.png");
+    const auto fly = Sprite::create("fly4.png");
     setContentSize(fly->getContentSize());
 
     fly->setAnchorPoint({0.0f, 0.0f});
@@ -61,10 +56,9 @@ Rect SimpleTarget::getCollisionBox() const
 
 void SimpleTarget::onCollide(PhysicsBody* collideBody)
 {
+    Target::onCollide(collideBody);
     if (auto collideTarget = dynamic_cast<SimpleTarget*>(collideBody)) {
         onCollide(collideTarget);
-    } else if (auto bullet = dynamic_cast<Bullet*>(collideBody)) {
-        onCollide(bullet);
     }
 }
 
@@ -81,14 +75,6 @@ void SimpleTarget::onCollide(SimpleTarget* collideTarget)
             collideTarget->changeMovingDirection();
         }
     }
-}
-
-void SimpleTarget::onCollide(Bullet* bullet)
-{
-    removeFromParent();
-
-    if (m_hitHandler)
-        m_hitHandler(hitPoints);
 }
 
 void SimpleTarget::changeMovingDirection()
