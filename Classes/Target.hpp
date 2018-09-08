@@ -24,8 +24,10 @@ public:
 private:
     void onCollide(Bullet* bullet);
 
+    virtual int getMaxHealth() = 0;
     virtual int getHitPoints() = 0;
     virtual int getKillPoints() = 0;
 
     HitHandler m_hitHandler;
+    int m_health = 0;
 };

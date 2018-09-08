@@ -15,6 +15,8 @@ bool Target::init()
     if (!PhysicsBody::init())
         return false;
 
+    m_health = getMaxHealth();
+
     return true;
 }
 
@@ -27,8 +29,12 @@ void Target::onCollide(PhysicsBody* collideBody)
 
 void Target::onCollide(Bullet* bullet)
 {
-    removeFromParent();
+    m_health--;
+    const bool killed = (m_health <= 0);
+
+    if (killed)
+        removeFromParent();
 
     if (m_hitHandler)
-        m_hitHandler(true, getKillPoints());
+        m_hitHandler(killed, killed ? getKillPoints() : getHitPoints());
 }
