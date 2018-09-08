@@ -6,6 +6,7 @@
 //
 
 #include "Pistol.hpp"
+#include <cmath>
 #include "Bullet.hpp"
 #include "CollisionDetector.hpp"
 
@@ -45,15 +46,19 @@ Pistol* Pistol::create(std::weak_ptr<CollisionDetector> collisionDetector)
 
 void Pistol::shoot()
 {
+    if (!m_bulletGeneratedHandler)
+        return;
+
     const auto bullet = Bullet::create();
     bullet->setPosition({-4.0f, 23.0f});
-    bullet->setVelocity({-200.0f, 0.0f});
+    bullet->setVelocity({-200.0f * std::cosf(getRotation() * M_PI / 180.0f), 200.0f * std::sinf(getRotation() * M_PI / 180.0f)});
     bullet->setAcceleration({0.0f, -50.0f});
-    addChild(bullet);
 
     if (auto detector = m_collisionDetector.lock()) {
         detector->registerBody(bullet);
     }
+
+    m_bulletGeneratedHandler(bullet);
 }
 
 void Pistol::reset()

@@ -10,6 +10,7 @@
 #include "Pistol.hpp"
 #include "CollisionDetector.hpp"
 #include "FastTarget.hpp"
+#include "Bullet.hpp"
 
 USING_NS_CC;
 
@@ -80,6 +81,11 @@ bool GameLayer::init()
     addChild(createBackground());
 
     m_pistol = createPistol();
+    m_pistol->setBulletGeneratedHandler([this](Bullet* bullet) {
+        const auto bulletPosition = m_targetsHolder->convertToNodeSpace(m_pistol->convertToWorldSpace(bullet->getPosition()));
+        bullet->setPosition(bulletPosition);
+        m_targetsHolder->addChild(bullet);
+    });
     addChild(m_pistol);
 
     m_targetsHolder = createTargetsHolder();
