@@ -79,6 +79,10 @@
 		C6ADD2A22143F050002517E8 /* fly3.png in Resources */ = {isa = PBXBuildFile; fileRef = C6ADD2A02143F050002517E8 /* fly3.png */; };
 		C6ADD2A42143F0BA002517E8 /* fly4.png in Resources */ = {isa = PBXBuildFile; fileRef = C6ADD2A32143F0BA002517E8 /* fly4.png */; };
 		C6ADD2A52143F0BA002517E8 /* fly4.png in Resources */ = {isa = PBXBuildFile; fileRef = C6ADD2A32143F0BA002517E8 /* fly4.png */; };
+		C6ADD2A821440D91002517E8 /* bar_background.png in Resources */ = {isa = PBXBuildFile; fileRef = C6ADD2A621440D90002517E8 /* bar_background.png */; };
+		C6ADD2A921440D91002517E8 /* bar_background.png in Resources */ = {isa = PBXBuildFile; fileRef = C6ADD2A621440D90002517E8 /* bar_background.png */; };
+		C6ADD2AA21440D91002517E8 /* bar.png in Resources */ = {isa = PBXBuildFile; fileRef = C6ADD2A721440D90002517E8 /* bar.png */; };
+		C6ADD2AB21440D91002517E8 /* bar.png in Resources */ = {isa = PBXBuildFile; fileRef = C6ADD2A721440D90002517E8 /* bar.png */; };
 		D44C620C132DFF330009C878 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620B132DFF330009C878 /* OpenAL.framework */; };
 		D44C620E132DFF430009C878 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620D132DFF430009C878 /* AVFoundation.framework */; };
 		D44C6210132DFF4E0009C878 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620F132DFF4E0009C878 /* AudioToolbox.framework */; };
@@ -189,6 +193,8 @@
 		C6ADD29D2143E92E002517E8 /* FastTarget.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FastTarget.hpp; sourceTree = "<group>"; };
 		C6ADD2A02143F050002517E8 /* fly3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fly3.png; sourceTree = "<group>"; };
 		C6ADD2A32143F0BA002517E8 /* fly4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fly4.png; sourceTree = "<group>"; };
+		C6ADD2A621440D90002517E8 /* bar_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bar_background.png; sourceTree = "<group>"; };
+		C6ADD2A721440D90002517E8 /* bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bar.png; sourceTree = "<group>"; };
 		D44C620B132DFF330009C878 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		D44C620D132DFF430009C878 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D44C620F132DFF4E0009C878 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -330,6 +336,8 @@
 				C6ADD2972143E846002517E8 /* fly2.png */,
 				C6ADD2A02143F050002517E8 /* fly3.png */,
 				C6ADD2A32143F0BA002517E8 /* fly4.png */,
+				C6ADD2A621440D90002517E8 /* bar_background.png */,
+				C6ADD2A721440D90002517E8 /* bar.png */,
 				46880B7A19C43A67006E1F66 /* HelloWorld.png */,
 				C6ADD284214071E5002517E8 /* pistol.png */,
 				C6ADD28F214079BF002517E8 /* drop.png */,
@@ -494,9 +502,11 @@
 				C6ADD2982143E846002517E8 /* fly1.png in Resources */,
 				1A88B2641FC3D9C9005C14AE /* Images.xcassets in Resources */,
 				46880B7D19C43A67006E1F66 /* CloseSelected.png in Resources */,
+				C6ADD2AA21440D91002517E8 /* bar.png in Resources */,
 				521A8EA919F11F5000D177D7 /* fonts in Resources */,
 				3EACC98F19EE6D4300EB3C5E /* res in Resources */,
 				C6ADD290214079BF002517E8 /* drop.png in Resources */,
+				C6ADD2A821440D91002517E8 /* bar_background.png in Resources */,
 				C6ADD2A12143F050002517E8 /* fly3.png in Resources */,
 				1AF87B891F6F781D007BE51C /* LaunchScreenBackground.png in Resources */,
 				C6ADD2A42143F0BA002517E8 /* fly4.png in Resources */,
@@ -516,7 +526,9 @@
 				C6ADD26C213BC85D002517E8 /* background.jpg in Resources */,
 				3EACC99019EE6D4300EB3C5E /* res in Resources */,
 				C6ADD2A22143F050002517E8 /* fly3.png in Resources */,
+				C6ADD2AB21440D91002517E8 /* bar.png in Resources */,
 				C6ADD2A52143F0BA002517E8 /* fly4.png in Resources */,
+				C6ADD2A921440D91002517E8 /* bar_background.png in Resources */,
 				521A8EAA19F11F5000D177D7 /* fonts in Resources */,
 				C6ADD291214079BF002517E8 /* drop.png in Resources */,
 				C6ADD2992143E846002517E8 /* fly1.png in Resources */,

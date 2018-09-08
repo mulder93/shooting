@@ -39,6 +39,7 @@ private:
     cocos2d::Label* m_scoreLabel = nullptr;
     cocos2d::Label* m_timerLabel = nullptr;
     cocos2d::Label* m_resultLabel = nullptr;
+    cocos2d::ProgressTimer* m_energyBar = nullptr;
 
     int m_score = 0;
     float m_timeLeft = 50.0f;

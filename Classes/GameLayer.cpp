@@ -80,6 +80,23 @@ bool GameLayer::init()
 
     addChild(createBackground());
 
+    const auto screenSize = Director::getInstance()->getVisibleSize();
+    const auto barBackground = Sprite::create("bar_background.png");
+    barBackground->setAnchorPoint({0.0f, 1.0f});
+    barBackground->setPosition({5.0f, screenSize.height - 5.0f});
+    addChild(barBackground);
+
+    const auto bar = Sprite::create("bar.png");
+    bar->setAnchorPoint({0.0f, 0.5f});
+
+    m_energyBar = ProgressTimer::create(bar);
+    m_energyBar->setAnchorPoint({0.5f, 0.5f});
+    m_energyBar->setPosition({barBackground->getContentSize().width * 0.5f, barBackground->getContentSize().height * 0.5f});
+    m_energyBar->setType(ProgressTimer::Type::BAR);
+    m_energyBar->setMidpoint({0.0f, 0.5f});
+    m_energyBar->setBarChangeRate({1.0f, 0.0f});
+    barBackground->addChild(m_energyBar);
+
     m_pistol = createPistol();
     m_pistol->setBulletGeneratedHandler([this](Bullet* bullet) {
         const auto bulletPosition = m_targetsHolder->convertToNodeSpace(m_pistol->convertToWorldSpace(bullet->getPosition()));
@@ -194,7 +211,11 @@ void GameLayer::showResults()
 
 void GameLayer::update(float delta)
 {
+    if (!m_playing)
+        return;
+
     m_collisionDetector->update(delta);
+    m_energyBar->setPercentage(100.0f * m_pistol->getEnergy() / m_pistol->getMaxEnergy());
 
     m_timeLeft = std::max(0.0f, m_timeLeft - delta);
     updateTimerLabel();

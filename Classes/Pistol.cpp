@@ -12,6 +12,12 @@
 
 USING_NS_CC;
 
+namespace
+{
+    constexpr auto energyPerBullet = 15.0f;
+    constexpr auto energyRestoringSpeed = 15.0f;
+}
+
 bool Pistol::init()
 {
     return Pistol::init(std::shared_ptr<CollisionDetector>());
@@ -21,6 +27,8 @@ bool Pistol::init(std::weak_ptr<CollisionDetector> collisionDetector)
 {
     if (!Node::init())
         return false;
+
+    scheduleUpdate();
 
     m_collisionDetector = std::move(collisionDetector);
 
@@ -44,11 +52,19 @@ Pistol* Pistol::create(std::weak_ptr<CollisionDetector> collisionDetector)
     return nullptr;
 }
 
+void Pistol::update(float delta)
+{
+    m_energy = std::min(getMaxEnergy(), m_energy + energyRestoringSpeed * delta);
+}
+
 void Pistol::shoot()
 {
     if (!m_bulletGeneratedHandler)
         return;
 
+    if (m_energy < energyPerBullet)
+        return;
+    
     const auto bullet = Bullet::create();
     bullet->setPosition({-4.0f, 23.0f});
     bullet->setVelocity({-200.0f * std::cosf(getRotation() * M_PI / 180.0f), 200.0f * std::sinf(getRotation() * M_PI / 180.0f)});
@@ -58,11 +74,13 @@ void Pistol::shoot()
         detector->registerBody(bullet);
     }
 
+    m_energy -= energyPerBullet;
     m_bulletGeneratedHandler(bullet);
 }
 
 void Pistol::reset()
 {
     setRotation(0.0f);
+    m_energy = getMaxEnergy();
     // TODO: remove all bullets
 }
