@@ -21,7 +21,22 @@ public:
     bool onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *event) override;
 
 private:
+    void startGame();
+    void endGame();
+
+    Pistol* createPistol();
+    void initTargets();
+
+    void updateScoreLabel();
+    void updateTimerLabel();
+
     std::shared_ptr<CollisionDetector> m_collisionDetector;
     Pistol* m_pistol = nullptr;
+    cocos2d::Node* m_targetsHolder = nullptr;
+
+    cocos2d::Label* m_scoreLabel = nullptr;
+    cocos2d::Label* m_timerLabel = nullptr;
+
     int m_score = 0;
+    float m_timeLeft = 50.0f;
 };

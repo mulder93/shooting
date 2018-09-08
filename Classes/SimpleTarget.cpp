@@ -85,10 +85,10 @@ void SimpleTarget::onCollide(SimpleTarget* collideTarget)
 
 void SimpleTarget::onCollide(Bullet* bullet)
 {
+    removeFromParent();
+
     if (m_hitHandler)
         m_hitHandler(hitPoints);
-
-    removeFromParent();
 }
 
 void SimpleTarget::changeMovingDirection()
