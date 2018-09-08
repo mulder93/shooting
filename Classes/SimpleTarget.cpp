@@ -35,6 +35,11 @@ bool SimpleTarget::init()
     return true;
 }
 
+SimpleTarget::~SimpleTarget()
+{
+    log("Simple Target is destroyed");
+}
+
 void SimpleTarget::update(float delta)
 {
     PhysicsBody::update(delta);
@@ -76,6 +81,7 @@ void SimpleTarget::onCollide(SimpleTarget* collideTarget)
 void SimpleTarget::onCollide(Bullet* bullet)
 {
     removeFromParent();
+    bullet->removeFromParent();
 }
 
 void SimpleTarget::changeMovingDirection()

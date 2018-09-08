@@ -20,10 +20,14 @@ public:
     const cocos2d::Vec2& getVelocity() { return m_velocity; }
     void setVelocity(cocos2d::Vec2 velocity) { m_velocity = std::move(velocity); }
 
+    const cocos2d::Vec2& getAcceleration() { return m_acceleration; }
+    void setAcceleration(cocos2d::Vec2 acceleration) { m_acceleration = std::move(acceleration); }
+
     virtual cocos2d::Rect getCollisionBox() const = 0;
 
     virtual void onCollide(PhysicsBody* collideBody) {}
 
 private:
     cocos2d::Vec2 m_velocity{0.0f, 0.0f};
+    cocos2d::Vec2 m_acceleration{0.0f, 0.0f};
 };

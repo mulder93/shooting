@@ -14,6 +14,7 @@ class Bullet : public PhysicsBody
 public:
     CREATE_FUNC(Bullet);
     bool init() override;
+    ~Bullet();
 
     void update(float delta) override;
 

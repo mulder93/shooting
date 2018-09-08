@@ -47,7 +47,8 @@ void Pistol::shoot()
 {
     const auto bullet = Bullet::create();
     bullet->setPosition({-4.0f, 23.0f});
-    bullet->setVelocity({-50.0f, 0.0f});
+    bullet->setVelocity({-200.0f, 0.0f});
+    bullet->setAcceleration({0.0f, -50.0f});
     addChild(bullet);
 
     if (auto detector = m_collisionDetector.lock()) {

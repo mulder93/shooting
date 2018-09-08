@@ -16,6 +16,7 @@ class SimpleTarget : public PhysicsBody
 public:
     CREATE_FUNC(SimpleTarget);
     bool init() override;
+    ~SimpleTarget();
 
     void update(float delta) override;
 

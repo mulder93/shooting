@@ -20,4 +20,5 @@ bool PhysicsBody::init()
 void PhysicsBody::update(float delta)
 {
     setPosition(getPosition() + getVelocity() * delta);
+    setVelocity(getVelocity() + getAcceleration() * delta);
 }

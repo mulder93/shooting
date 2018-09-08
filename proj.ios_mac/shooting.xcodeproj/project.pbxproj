@@ -71,6 +71,8 @@
 		C6ADD28E214077E6002517E8 /* Bullet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6ADD28B214077E6002517E8 /* Bullet.cpp */; };
 		C6ADD290214079BF002517E8 /* drop.png in Resources */ = {isa = PBXBuildFile; fileRef = C6ADD28F214079BF002517E8 /* drop.png */; };
 		C6ADD291214079BF002517E8 /* drop.png in Resources */ = {isa = PBXBuildFile; fileRef = C6ADD28F214079BF002517E8 /* drop.png */; };
+		C6ADD29421432022002517E8 /* GameLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6ADD29221432022002517E8 /* GameLayer.cpp */; };
+		C6ADD29521432022002517E8 /* GameLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6ADD29221432022002517E8 /* GameLayer.cpp */; };
 		D44C620C132DFF330009C878 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620B132DFF330009C878 /* OpenAL.framework */; };
 		D44C620E132DFF430009C878 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620D132DFF430009C878 /* AVFoundation.framework */; };
 		D44C6210132DFF4E0009C878 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620F132DFF4E0009C878 /* AudioToolbox.framework */; };
@@ -176,6 +178,8 @@
 		C6ADD28B214077E6002517E8 /* Bullet.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Bullet.cpp; sourceTree = "<group>"; };
 		C6ADD28C214077E6002517E8 /* Bullet.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Bullet.hpp; sourceTree = "<group>"; };
 		C6ADD28F214079BF002517E8 /* drop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = drop.png; sourceTree = "<group>"; };
+		C6ADD29221432022002517E8 /* GameLayer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GameLayer.cpp; sourceTree = "<group>"; };
+		C6ADD29321432022002517E8 /* GameLayer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GameLayer.hpp; sourceTree = "<group>"; };
 		D44C620B132DFF330009C878 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		D44C620D132DFF430009C878 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D44C620F132DFF4E0009C878 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -343,6 +347,8 @@
 				C6ADD2882140721C002517E8 /* Pistol.hpp */,
 				C6ADD28B214077E6002517E8 /* Bullet.cpp */,
 				C6ADD28C214077E6002517E8 /* Bullet.hpp */,
+				C6ADD29221432022002517E8 /* GameLayer.cpp */,
+				C6ADD29321432022002517E8 /* GameLayer.hpp */,
 			);
 			name = Classes;
 			path = ../Classes;
@@ -516,6 +522,7 @@
 				C6ADD282213DC17C002517E8 /* CollisionDetector.cpp in Sources */,
 				1AF87B8A1F6F7822007BE51C /* main.m in Sources */,
 				C6ADD2892140721C002517E8 /* Pistol.cpp in Sources */,
+				C6ADD29421432022002517E8 /* GameLayer.cpp in Sources */,
 				C6ADD28D214077E6002517E8 /* Bullet.cpp in Sources */,
 				46880B8A19C43A87006E1F66 /* HelloWorldScene.cpp in Sources */,
 				C6ADD27E213BF6D0002517E8 /* PhysicsBody.cpp in Sources */,
@@ -534,6 +541,7 @@
 				C6ADD269213BC297002517E8 /* MainScene.cpp in Sources */,
 				C6ADD270213BCDB7002517E8 /* Target.cpp in Sources */,
 				C6ADD28E214077E6002517E8 /* Bullet.cpp in Sources */,
+				C6ADD29521432022002517E8 /* GameLayer.cpp in Sources */,
 				C6ADD283213DC17C002517E8 /* CollisionDetector.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
 				46880B8B19C43A87006E1F66 /* HelloWorldScene.cpp in Sources */,
