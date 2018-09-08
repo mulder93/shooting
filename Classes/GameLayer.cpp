@@ -30,7 +30,7 @@ namespace
         return holder;
     }
 
-    auto createLabel(float offsetX)
+    auto createHudLabel(float offsetX)
     {
         const auto label = Label::createWithTTF("", "fonts/arial.ttf", 20.0f);
         label->setAnchorPoint({0.0f, 1.0f});
@@ -43,12 +43,26 @@ namespace
 
     auto createScoreLabel()
     {
-        return createLabel(100.0f);
+        return createHudLabel(100.0f);
     }
 
     auto createTimerLabel()
     {
-        return createLabel(200.0f);
+        return createHudLabel(200.0f);
+    }
+
+    auto createResultLabel()
+    {
+        const auto label = Label::createWithTTF("", "fonts/arial.ttf", 30.0f);
+        label->setAnchorPoint({0.5f, 0.5f});
+
+        const auto screenSize = Director::getInstance()->getVisibleSize();
+        label->setPosition(Vec2(screenSize.width * 0.5f, screenSize.height * 0.5f));
+
+        label->setVisible(false);
+        label->setAlignment(TextHAlignment::CENTER);
+        label->setTextColor(Color4B::BLACK);
+        return label;
     }
 }
 
@@ -58,6 +72,7 @@ bool GameLayer::init()
         return false;
 
     scheduleUpdate();
+    setTouchEnabled(true);
     setTouchMode(Touch::DispatchMode::ONE_BY_ONE);
     m_collisionDetector = std::make_shared<CollisionDetector>(this);
 
@@ -72,6 +87,9 @@ bool GameLayer::init()
     m_timerLabel = createTimerLabel();
     addChild(m_timerLabel);
 
+    m_resultLabel = createResultLabel();
+    addChild(m_resultLabel);
+
     m_pistol = createPistol();
     addChild(m_pistol);
 
@@ -85,17 +103,20 @@ void GameLayer::startGame()
     m_score = 0;
     updateScoreLabel();
 
-    m_timeLeft = 30.0f;
+    m_timeLeft = 5.0f;
     updateTimerLabel();
 
-    initTargets();
+    m_pistol->reset();
+    resetTargets();
 
-    setTouchEnabled(true);
+    m_resultLabel->setVisible(false);
+    m_playing = true;
 }
 
 void GameLayer::endGame()
 {
-    setTouchEnabled(false);
+    m_playing = false;
+    showResults();
 }
 
 Pistol* GameLayer::createPistol()
@@ -110,8 +131,10 @@ Pistol* GameLayer::createPistol()
     return pistol;
 }
 
-void GameLayer::initTargets()
+void GameLayer::resetTargets()
 {
+    m_targetsHolder->removeAllChildrenWithCleanup(true);
+    
     for (auto i = 0; i < 15; ++i) {
         const auto target = SimpleTarget::create();
         target->setHitHandler([this](int points) {
@@ -139,6 +162,13 @@ void GameLayer::updateTimerLabel()
     m_timerLabel->setString(std::string("Time: ") + std::to_string(secondsLeft));
 }
 
+void GameLayer::showResults()
+{
+    const auto resultString = std::string("Final score: ") + std::to_string(m_score) + std::string("\nTap to restart");
+    m_resultLabel->setString(resultString);
+    m_resultLabel->setVisible(true);
+}
+
 void GameLayer::update(float delta)
 {
     m_collisionDetector->update(delta);
@@ -152,6 +182,11 @@ void GameLayer::update(float delta)
 
 bool GameLayer::onTouchBegan(Touch *touch, Event *event)
 {
-    m_pistol->shoot();
+    if (m_playing) {
+        m_pistol->shoot();
+    } else {
+        startGame();
+    }
+
     return true;
 }

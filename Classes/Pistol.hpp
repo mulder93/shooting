@@ -21,6 +21,7 @@ public:
     static Pistol* create(std::weak_ptr<CollisionDetector> collisionDetector);
 
     void shoot();
+    void reset();
 
 private:
     std::weak_ptr<CollisionDetector> m_collisionDetector;

@@ -55,3 +55,8 @@ void Pistol::shoot()
         detector->registerBody(bullet);
     }
 }
+
+void Pistol::reset()
+{
+    // TODO: remove all bullets
+}

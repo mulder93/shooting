@@ -25,10 +25,11 @@ private:
     void endGame();
 
     Pistol* createPistol();
-    void initTargets();
+    void resetTargets();
 
     void updateScoreLabel();
     void updateTimerLabel();
+    void showResults();
 
     std::shared_ptr<CollisionDetector> m_collisionDetector;
     Pistol* m_pistol = nullptr;
@@ -36,7 +37,9 @@ private:
 
     cocos2d::Label* m_scoreLabel = nullptr;
     cocos2d::Label* m_timerLabel = nullptr;
+    cocos2d::Label* m_resultLabel = nullptr;
 
     int m_score = 0;
     float m_timeLeft = 50.0f;
+    bool m_playing = false;
 };
