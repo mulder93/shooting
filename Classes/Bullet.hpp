@@ -19,6 +19,5 @@ public:
     void update(float delta) override;
 
     cocos2d::Rect getCollisionBox() const override;
-
     void onCollide(PhysicsBody* collideBody) override;
 };

@@ -18,10 +18,10 @@ public:
     bool init() override;
 
     void update(float delta) override;
-
     bool onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *event) override;
 
 private:
     std::shared_ptr<CollisionDetector> m_collisionDetector;
     Pistol* m_pistol = nullptr;
+    int m_score = 0;
 };

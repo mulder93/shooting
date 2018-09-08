@@ -49,5 +49,5 @@ Rect Bullet::getCollisionBox() const
 
 void Bullet::onCollide(PhysicsBody* collideBody)
 {
-
+    removeFromParent();
 }

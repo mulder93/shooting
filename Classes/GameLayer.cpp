@@ -30,6 +30,11 @@ bool GameLayer::init()
 
     for (auto i = 0; i < 15; ++i) {
         const auto target = SimpleTarget::create();
+        target->setHitHandler([this](int points) {
+            m_score += points;
+            log("Current score is %d", m_score);
+        });
+
         addChild(target);
         m_collisionDetector->registerBody(target);
     }

@@ -10,6 +10,11 @@
 
 USING_NS_CC;
 
+namespace
+{
+    constexpr auto hitPoints = 10;
+}
+
 bool SimpleTarget::init()
 {
     if (!PhysicsBody::init())
@@ -80,8 +85,10 @@ void SimpleTarget::onCollide(SimpleTarget* collideTarget)
 
 void SimpleTarget::onCollide(Bullet* bullet)
 {
+    if (m_hitHandler)
+        m_hitHandler(hitPoints);
+
     removeFromParent();
-    bullet->removeFromParent();
 }
 
 void SimpleTarget::changeMovingDirection()
