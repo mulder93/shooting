@@ -25,12 +25,13 @@ bool SimpleTarget::init()
     setContentSize(fly->getContentSize());
 
     const auto screenSize = Director::getInstance()->getVisibleSize();
-    const auto positionX = random(0.0f, 200.0f);
+    const auto positionX = random(-100.0f, 200.0f);
     const auto positionY = random(0.0f, screenSize.height - getContentSize().height);
     setPosition(positionX, positionY);
 
+    const auto velocityX = random(5.0f, 20.0f);
     const auto velocityY = random(10.0f, 30.0f) * (rand_0_1() > 0.5f ? -1.0f : 1.0f);
-    setVelocity({0.0f, velocityY});
+    setVelocity({velocityX, velocityY});
 
     return true;
 }

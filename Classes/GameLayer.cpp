@@ -6,6 +6,7 @@
 //
 
 #include "GameLayer.hpp"
+#include <cmath>
 #include "SimpleTarget.hpp"
 #include "Pistol.hpp"
 #include "CollisionDetector.hpp"
@@ -78,6 +79,15 @@ bool GameLayer::init()
     setTouchMode(Touch::DispatchMode::ONE_BY_ONE);
     m_collisionDetector = std::make_shared<CollisionDetector>(this);
 
+    m_touchListener = EventListenerTouchOneByOne::create();
+    m_touchListener->onTouchBegan = CC_CALLBACK_2(GameLayer::onTouchBegan, this);
+    m_touchListener->onTouchMoved = CC_CALLBACK_2(GameLayer::onTouchMoved, this);
+    Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(m_touchListener, this);
+
+    m_mouseListener = EventListenerMouse::create();
+    m_mouseListener->onMouseMove = CC_CALLBACK_1(GameLayer::onMouseMoved, this);
+    Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(m_mouseListener, this);
+
     addChild(createBackground());
 
     const auto screenSize = Director::getInstance()->getVisibleSize();
@@ -122,12 +132,18 @@ bool GameLayer::init()
     return true;
 }
 
+GameLayer::~GameLayer()
+{
+    Director::getInstance()->getEventDispatcher()->removeEventListener(m_touchListener);
+    Director::getInstance()->getEventDispatcher()->removeEventListener(m_mouseListener);
+}
+
 void GameLayer::startGame()
 {
     m_score = 0;
     updateScoreLabel();
 
-    m_timeLeft = 15.0f;
+    m_timeLeft = 30.0f;
     updateTimerLabel();
 
     m_pistol->reset();
@@ -159,7 +175,7 @@ void GameLayer::resetTargets()
 {
     m_targetsHolder->removeAllChildrenWithCleanup(true);
     
-    for (auto i = 0; i < 15; ++i) {
+    for (auto i = 0; i < 30; ++i) {
         const auto target = SimpleTarget::create();
         target->setHitHandler([this](bool killed, int points) {
             m_score += points;
@@ -237,10 +253,24 @@ bool GameLayer::onTouchBegan(Touch *touch, Event *event)
 
 void GameLayer::onTouchMoved(cocos2d::Touch *touch, cocos2d::Event *event)
 {
+    onInputMoved(touch->getLocation(), touch->getPreviousLocation());
+}
+
+void GameLayer::onMouseMoved(EventMouse* event)
+{
+    const auto mousePosition = Vec2(event->getCursorX(), event->getCursorY());
+    const auto delta = m_pistol->getPosition() - mousePosition;
+    const auto angleRadians = -std::atanf(delta.y / delta.x);
+    const auto angleDegrees = std::max(-60.0f, std::min(60.0f, angleRadians * 180.0f / static_cast<float>(M_PI)));
+    m_pistol->setRotation(angleDegrees);
+}
+
+void GameLayer::onInputMoved(const Vec2& location, const Vec2& previousLocation)
+{
     if (!m_playing)
         return;
 
-    const auto angleDiff = (touch->getLocation().y - touch->getPreviousLocation().y) * 1.5f;
+    const auto angleDiff = (location.y - previousLocation.y) * 1.5f;
     const auto newAngle = std::max(-60.0f, std::min(60.0f, m_pistol->getRotation() + angleDiff));
     m_pistol->setRotation(newAngle);
 }

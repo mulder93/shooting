@@ -25,7 +25,7 @@ public:
 private:
     void onCollide(SimpleTarget* collideTarget);
 
-    int getMaxHealth() override { return 2; }
+    int getMaxHealth() override { return 1; }
     int getHitPoints() override { return 3; }
     int getKillPoints() override { return 7; }
 

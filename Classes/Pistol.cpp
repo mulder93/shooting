@@ -66,8 +66,9 @@ void Pistol::shoot()
         return;
     
     const auto bullet = Bullet::create();
+    bullet->setScale(2.0f);
     bullet->setPosition({-4.0f, 23.0f});
-    bullet->setVelocity({-200.0f * std::cosf(getRotation() * M_PI / 180.0f), 200.0f * std::sinf(getRotation() * M_PI / 180.0f)});
+    bullet->setVelocity({-300.0f * std::cosf(getRotation() * M_PI / 180.0f), 300.0f * std::sinf(getRotation() * M_PI / 180.0f)});
     bullet->setAcceleration({0.0f, -50.0f});
 
     if (auto detector = m_collisionDetector.lock()) {
