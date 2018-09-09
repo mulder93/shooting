@@ -7,7 +7,6 @@
 
 #pragma once
 
-#include <memory>
 #include <functional>
 #include "cocos2d.h"
 
@@ -21,8 +20,6 @@ public:
 
     CREATE_FUNC(Pistol);
     bool init() override;
-    bool init(std::weak_ptr<CollisionDetector> collisionDetector);
-    static Pistol* create(std::weak_ptr<CollisionDetector> collisionDetector);
 
     void update(float delta) override;
 
@@ -35,7 +32,6 @@ public:
     float getMaxEnergy() { return 100; }
 
 private:
-    std::weak_ptr<CollisionDetector> m_collisionDetector;
     BulletGeneratedHandler m_bulletGeneratedHandler;
     float m_energy = 100;
 };

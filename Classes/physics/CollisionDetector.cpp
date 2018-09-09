@@ -7,11 +7,6 @@
 
 #include "CollisionDetector.hpp"
 
-CollisionDetector::CollisionDetector(cocos2d::Node* worldNode) : m_worldNode(worldNode)
-{
-
-}
-
 void CollisionDetector::registerBody(PhysicsBody* body)
 {
     m_bodies.pushBack(body);

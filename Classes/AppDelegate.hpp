@@ -1,5 +1,5 @@
 //
-//  AppDelegate.h
+//  AppDelegate.hpp
 //  shooting
 //
 //  Created by Boris Tsarev on 02/09/2018.
@@ -12,8 +12,7 @@
 class AppDelegate : private cocos2d::Application
 {
 public:
-    AppDelegate();
-    virtual ~AppDelegate();
+    virtual ~AppDelegate() { }
 
     virtual void initGLContextAttrs();
     virtual bool applicationDidFinishLaunching();

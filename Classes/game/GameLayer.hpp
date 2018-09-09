@@ -7,6 +7,7 @@
 
 #include <memory>
 #include "cocos2d.h"
+#include "EventListenerHolder.hpp"
 
 class CollisionDetector;
 class Pistol;
@@ -16,29 +17,28 @@ class GameLayer : public cocos2d::Layer
 public:
     CREATE_FUNC(GameLayer);
     bool init() override;
-    ~GameLayer();
 
     void update(float delta) override;
-    bool onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *event);
-    void onTouchMoved(cocos2d::Touch *touch, cocos2d::Event *event);
+    
+    bool onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *event) override;
+    void onTouchMoved(cocos2d::Touch *touch, cocos2d::Event *event) override;
     void onMouseMoved(cocos2d::EventMouse* event);
 
 private:
     void startGame();
     void endGame();
 
-    Pistol* createPistol();
+    cocos2d::EventListener* createTouchListener();
+    cocos2d::EventListener* createMouseListener();
+
+    Pistol* createPistol() const;
     void resetTargets();
 
     void updateScoreLabel();
     void updateTimerLabel();
     void showResults();
 
-    void onInputMoved(const cocos2d::Vec2& location, const cocos2d::Vec2& previousLocation);
-
-    cocos2d::EventListenerTouchOneByOne* m_touchListener = nullptr;
-    cocos2d::EventListenerMouse* m_mouseListener = nullptr;
-
+    EventListenerHolder m_eventListenerHolder;
     std::shared_ptr<CollisionDetector> m_collisionDetector;
     Pistol* m_pistol = nullptr;
     cocos2d::Node* m_targetsHolder = nullptr;
@@ -51,5 +51,4 @@ private:
     int m_score = 0;
     float m_timeLeft = 50.0f;
     bool m_playing = false;
-    cocos2d::Vec2 m_mousePreviousPosition{0.0f, 0.0f};
 };

@@ -9,8 +9,6 @@
 
 #include "cocos2d.h"
 
-class CollisionDetector;
-
 class MainScene : public cocos2d::Scene
 {
 public:

@@ -13,11 +13,10 @@
 class CollisionDetector
 {
 public:
-    CollisionDetector(cocos2d::Node* worldNode);
+    //TODO: copy/move?
     void registerBody(PhysicsBody* body);
     void update(float delta);
 
 private:
-    cocos2d::Node* m_worldNode;
     cocos2d::Vector<PhysicsBody*> m_bodies;
 };

@@ -83,6 +83,10 @@
 		C6ADD2A921440D91002517E8 /* bar_background.png in Resources */ = {isa = PBXBuildFile; fileRef = C6ADD2A621440D90002517E8 /* bar_background.png */; };
 		C6ADD2AA21440D91002517E8 /* bar.png in Resources */ = {isa = PBXBuildFile; fileRef = C6ADD2A721440D90002517E8 /* bar.png */; };
 		C6ADD2AB21440D91002517E8 /* bar.png in Resources */ = {isa = PBXBuildFile; fileRef = C6ADD2A721440D90002517E8 /* bar.png */; };
+		C6ADD2B121455AC9002517E8 /* EventListenerHolder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6ADD2AF21455AC9002517E8 /* EventListenerHolder.cpp */; };
+		C6ADD2B221455AC9002517E8 /* EventListenerHolder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6ADD2AF21455AC9002517E8 /* EventListenerHolder.cpp */; };
+		C6ADD2B521456181002517E8 /* NodeUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6ADD2B321456181002517E8 /* NodeUtils.cpp */; };
+		C6ADD2B621456181002517E8 /* NodeUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6ADD2B321456181002517E8 /* NodeUtils.cpp */; };
 		D44C620C132DFF330009C878 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620B132DFF330009C878 /* OpenAL.framework */; };
 		D44C620E132DFF430009C878 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620D132DFF430009C878 /* AVFoundation.framework */; };
 		D44C6210132DFF4E0009C878 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620F132DFF4E0009C878 /* AudioToolbox.framework */; };
@@ -152,7 +156,7 @@
 		46880B7719C43A67006E1F66 /* CloseSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CloseSelected.png; sourceTree = "<group>"; };
 		46880B7A19C43A67006E1F66 /* HelloWorld.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelloWorld.png; sourceTree = "<group>"; };
 		46880B8419C43A87006E1F66 /* AppDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AppDelegate.cpp; sourceTree = "<group>"; };
-		46880B8519C43A87006E1F66 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		46880B8519C43A87006E1F66 /* AppDelegate.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AppDelegate.hpp; sourceTree = "<group>"; };
 		503AE0F617EB97AB00D1A890 /* Icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Icon.icns; sourceTree = "<group>"; };
 		503AE0F717EB97AB00D1A890 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		503AE10317EB98FF00D1A890 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = mac/main.cpp; sourceTree = "<group>"; };
@@ -195,6 +199,10 @@
 		C6ADD2A32143F0BA002517E8 /* fly4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fly4.png; sourceTree = "<group>"; };
 		C6ADD2A621440D90002517E8 /* bar_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bar_background.png; sourceTree = "<group>"; };
 		C6ADD2A721440D90002517E8 /* bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bar.png; sourceTree = "<group>"; };
+		C6ADD2AF21455AC9002517E8 /* EventListenerHolder.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EventListenerHolder.cpp; sourceTree = "<group>"; };
+		C6ADD2B021455AC9002517E8 /* EventListenerHolder.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EventListenerHolder.hpp; sourceTree = "<group>"; };
+		C6ADD2B321456181002517E8 /* NodeUtils.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = NodeUtils.cpp; sourceTree = "<group>"; };
+		C6ADD2B421456181002517E8 /* NodeUtils.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = NodeUtils.hpp; sourceTree = "<group>"; };
 		D44C620B132DFF330009C878 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		D44C620D132DFF430009C878 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D44C620F132DFF4E0009C878 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -350,25 +358,12 @@
 			isa = PBXGroup;
 			children = (
 				46880B8419C43A87006E1F66 /* AppDelegate.cpp */,
-				46880B8519C43A87006E1F66 /* AppDelegate.h */,
+				46880B8519C43A87006E1F66 /* AppDelegate.hpp */,
 				C6ADD265213BC28F002517E8 /* MainScene.cpp */,
 				C6ADD266213BC28F002517E8 /* MainScene.hpp */,
-				C6ADD26D213BCDB7002517E8 /* Target.cpp */,
-				C6ADD26E213BCDB7002517E8 /* Target.hpp */,
-				C6ADD277213BD7A1002517E8 /* SimpleTarget.cpp */,
-				C6ADD278213BD7A1002517E8 /* SimpleTarget.hpp */,
-				C6ADD27C213BF6D0002517E8 /* PhysicsBody.cpp */,
-				C6ADD27D213BF6D0002517E8 /* PhysicsBody.hpp */,
-				C6ADD280213DC17C002517E8 /* CollisionDetector.cpp */,
-				C6ADD281213DC17C002517E8 /* CollisionDetector.hpp */,
-				C6ADD2872140721C002517E8 /* Pistol.cpp */,
-				C6ADD2882140721C002517E8 /* Pistol.hpp */,
-				C6ADD28B214077E6002517E8 /* Bullet.cpp */,
-				C6ADD28C214077E6002517E8 /* Bullet.hpp */,
-				C6ADD29221432022002517E8 /* GameLayer.cpp */,
-				C6ADD29321432022002517E8 /* GameLayer.hpp */,
-				C6ADD29C2143E92E002517E8 /* FastTarget.cpp */,
-				C6ADD29D2143E92E002517E8 /* FastTarget.hpp */,
+				C6ADD2AC214556B9002517E8 /* game */,
+				C6ADD2AE214556FE002517E8 /* physics */,
+				C6ADD2AD214556C4002517E8 /* utility */,
 			);
 			name = Classes;
 			path = ../Classes;
@@ -392,6 +387,47 @@
 				503AE10417EB98FF00D1A890 /* Prefix.pch */,
 			);
 			name = mac;
+			sourceTree = "<group>";
+		};
+		C6ADD2AC214556B9002517E8 /* game */ = {
+			isa = PBXGroup;
+			children = (
+				C6ADD29221432022002517E8 /* GameLayer.cpp */,
+				C6ADD29321432022002517E8 /* GameLayer.hpp */,
+				C6ADD26D213BCDB7002517E8 /* Target.cpp */,
+				C6ADD26E213BCDB7002517E8 /* Target.hpp */,
+				C6ADD277213BD7A1002517E8 /* SimpleTarget.cpp */,
+				C6ADD278213BD7A1002517E8 /* SimpleTarget.hpp */,
+				C6ADD2872140721C002517E8 /* Pistol.cpp */,
+				C6ADD2882140721C002517E8 /* Pistol.hpp */,
+				C6ADD28B214077E6002517E8 /* Bullet.cpp */,
+				C6ADD28C214077E6002517E8 /* Bullet.hpp */,
+				C6ADD29C2143E92E002517E8 /* FastTarget.cpp */,
+				C6ADD29D2143E92E002517E8 /* FastTarget.hpp */,
+			);
+			path = game;
+			sourceTree = "<group>";
+		};
+		C6ADD2AD214556C4002517E8 /* utility */ = {
+			isa = PBXGroup;
+			children = (
+				C6ADD2AF21455AC9002517E8 /* EventListenerHolder.cpp */,
+				C6ADD2B021455AC9002517E8 /* EventListenerHolder.hpp */,
+				C6ADD2B321456181002517E8 /* NodeUtils.cpp */,
+				C6ADD2B421456181002517E8 /* NodeUtils.hpp */,
+			);
+			path = utility;
+			sourceTree = "<group>";
+		};
+		C6ADD2AE214556FE002517E8 /* physics */ = {
+			isa = PBXGroup;
+			children = (
+				C6ADD27C213BF6D0002517E8 /* PhysicsBody.cpp */,
+				C6ADD27D213BF6D0002517E8 /* PhysicsBody.hpp */,
+				C6ADD280213DC17C002517E8 /* CollisionDetector.cpp */,
+				C6ADD281213DC17C002517E8 /* CollisionDetector.hpp */,
+			);
+			path = physics;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -549,10 +585,12 @@
 				C6ADD29E2143E92E002517E8 /* FastTarget.cpp in Sources */,
 				1AF87B8B1F6F782A007BE51C /* RootViewController.mm in Sources */,
 				C6ADD279213BD7A1002517E8 /* SimpleTarget.cpp in Sources */,
+				C6ADD2B121455AC9002517E8 /* EventListenerHolder.cpp in Sources */,
 				46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				C6ADD282213DC17C002517E8 /* CollisionDetector.cpp in Sources */,
 				1AF87B8A1F6F7822007BE51C /* main.m in Sources */,
 				C6ADD2892140721C002517E8 /* Pistol.cpp in Sources */,
+				C6ADD2B521456181002517E8 /* NodeUtils.cpp in Sources */,
 				C6ADD29421432022002517E8 /* GameLayer.cpp in Sources */,
 				C6ADD28D214077E6002517E8 /* Bullet.cpp in Sources */,
 				C6ADD27E213BF6D0002517E8 /* PhysicsBody.cpp in Sources */,
@@ -571,10 +609,12 @@
 				46880B8919C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				C6ADD269213BC297002517E8 /* MainScene.cpp in Sources */,
 				C6ADD270213BCDB7002517E8 /* Target.cpp in Sources */,
+				C6ADD2B221455AC9002517E8 /* EventListenerHolder.cpp in Sources */,
 				C6ADD28E214077E6002517E8 /* Bullet.cpp in Sources */,
 				C6ADD29521432022002517E8 /* GameLayer.cpp in Sources */,
 				C6ADD283213DC17C002517E8 /* CollisionDetector.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
+				C6ADD2B621456181002517E8 /* NodeUtils.cpp in Sources */,
 				C6ADD27F213BF6D0002517E8 /* PhysicsBody.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -15,8 +15,7 @@ bool MainScene::init()
     if (!Scene::init())
         return false;
 
-    const auto gameLayer = GameLayer::create();
-    addChild(gameLayer);
+    addChild(GameLayer::create());
 
     return true;
 }

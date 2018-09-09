@@ -8,10 +8,11 @@
 #include "GameLayer.hpp"
 #include <cmath>
 #include "SimpleTarget.hpp"
-#include "Pistol.hpp"
-#include "CollisionDetector.hpp"
 #include "FastTarget.hpp"
+#include "Pistol.hpp"
 #include "Bullet.hpp"
+#include "CollisionDetector.hpp"
+#include "NodeUtils.hpp"
 
 USING_NS_CC;
 
@@ -75,18 +76,10 @@ bool GameLayer::init()
         return false;
 
     scheduleUpdate();
-    setTouchEnabled(true);
-    setTouchMode(Touch::DispatchMode::ONE_BY_ONE);
-    m_collisionDetector = std::make_shared<CollisionDetector>(this);
+    m_collisionDetector = std::make_shared<CollisionDetector>();
 
-    m_touchListener = EventListenerTouchOneByOne::create();
-    m_touchListener->onTouchBegan = CC_CALLBACK_2(GameLayer::onTouchBegan, this);
-    m_touchListener->onTouchMoved = CC_CALLBACK_2(GameLayer::onTouchMoved, this);
-    Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(m_touchListener, this);
-
-    m_mouseListener = EventListenerMouse::create();
-    m_mouseListener->onMouseMove = CC_CALLBACK_1(GameLayer::onMouseMoved, this);
-    Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(m_mouseListener, this);
+    m_eventListenerHolder.addListener(createTouchListener(), this);
+    m_eventListenerHolder.addListener(createMouseListener(), this);
 
     addChild(createBackground());
 
@@ -108,11 +101,6 @@ bool GameLayer::init()
     barBackground->addChild(m_energyBar);
 
     m_pistol = createPistol();
-    m_pistol->setBulletGeneratedHandler([this](Bullet* bullet) {
-        const auto bulletPosition = m_targetsHolder->convertToNodeSpace(m_pistol->convertToWorldSpace(bullet->getPosition()));
-        bullet->setPosition(bulletPosition);
-        m_targetsHolder->addChild(bullet);
-    });
     addChild(m_pistol);
 
     m_targetsHolder = createTargetsHolder();
@@ -132,10 +120,19 @@ bool GameLayer::init()
     return true;
 }
 
-GameLayer::~GameLayer()
+cocos2d::EventListener* GameLayer::createTouchListener()
 {
-    Director::getInstance()->getEventDispatcher()->removeEventListener(m_touchListener);
-    Director::getInstance()->getEventDispatcher()->removeEventListener(m_mouseListener);
+    const auto touchListener = EventListenerTouchOneByOne::create();
+    touchListener->onTouchBegan = CC_CALLBACK_2(GameLayer::onTouchBegan, this);
+    touchListener->onTouchMoved = CC_CALLBACK_2(GameLayer::onTouchMoved, this);
+    return touchListener;
+}
+
+cocos2d::EventListener* GameLayer::createMouseListener()
+{
+    const auto mouseListener = EventListenerMouse::create();
+    mouseListener->onMouseMove = CC_CALLBACK_1(GameLayer::onMouseMoved, this);
+    return mouseListener;
 }
 
 void GameLayer::startGame()
@@ -160,13 +157,19 @@ void GameLayer::endGame()
     showResults();
 }
 
-Pistol* GameLayer::createPistol()
+Pistol* GameLayer::createPistol() const
 {
-    const auto pistol = Pistol::create(m_collisionDetector);
+    const auto pistol = Pistol::create();
     pistol->setAnchorPoint({0.8f, 0.5f});
 
     const auto screenSize = Director::getInstance()->getVisibleSize();
     pistol->setPosition({screenSize.width - 20.0f, screenSize.height * 0.5f});
+
+    pistol->setBulletGeneratedHandler([this](Bullet* bullet) {
+        convertToAnotherNodeSpace(bullet, m_pistol, m_targetsHolder);
+        m_targetsHolder->addChild(bullet);
+        m_collisionDetector->registerBody(bullet);
+    });
 
     return pistol;
 }
@@ -253,7 +256,7 @@ bool GameLayer::onTouchBegan(Touch *touch, Event *event)
 
 void GameLayer::onTouchMoved(cocos2d::Touch *touch, cocos2d::Event *event)
 {
-    onInputMoved(touch->getLocation(), touch->getPreviousLocation());
+//    onInputMoved(touch->getLocation(), touch->getPreviousLocation());
 }
 
 void GameLayer::onMouseMoved(EventMouse* event)
@@ -265,12 +268,12 @@ void GameLayer::onMouseMoved(EventMouse* event)
     m_pistol->setRotation(angleDegrees);
 }
 
-void GameLayer::onInputMoved(const Vec2& location, const Vec2& previousLocation)
-{
-    if (!m_playing)
-        return;
-
-    const auto angleDiff = (location.y - previousLocation.y) * 1.5f;
-    const auto newAngle = std::max(-60.0f, std::min(60.0f, m_pistol->getRotation() + angleDiff));
-    m_pistol->setRotation(newAngle);
-}
+//void GameLayer::onInputMoved(const Vec2& location, const Vec2& previousLocation)
+//{
+//    if (!m_playing)
+//        return;
+//
+//    const auto angleDiff = (location.y - previousLocation.y) * 1.5f;
+//    const auto newAngle = std::max(-60.0f, std::min(60.0f, m_pistol->getRotation() + angleDiff));
+//    m_pistol->setRotation(newAngle);
+//}
