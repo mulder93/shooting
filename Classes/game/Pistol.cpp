@@ -8,6 +8,7 @@
 #include "Pistol.hpp"
 #include <cmath>
 #include "Bullet.hpp"
+#include "Helpers.hpp"
 
 USING_NS_CC;
 
@@ -15,6 +16,8 @@ namespace
 {
     constexpr auto energyPerBullet = 15.0f;
     constexpr auto energyRestoringSpeed = 15.0f;
+    constexpr auto bulletStartVelocity = 300.0f;
+    constexpr auto gravity = -50.0f;
 }
 
 bool Pistol::init()
@@ -25,16 +28,16 @@ bool Pistol::init()
     scheduleUpdate();
 
     const auto image = Sprite::create("pistol.png");
-    setContentSize(image->getContentSize());
-
     image->setAnchorPoint({0.0f, 0.0f});
     addChild(image);
 
+    setContentSize(image->getContentSize());
     return true;
 }
 
 void Pistol::update(float delta)
 {
+    // Energy is restoring automatically.
     m_energy = std::min(getMaxEnergy(), m_energy + energyRestoringSpeed * delta);
 }
 
@@ -49,8 +52,10 @@ void Pistol::shoot()
     const auto bullet = Bullet::create();
     bullet->setScale(2.0f);
     bullet->setPosition({-4.0f, 23.0f});
-    bullet->setVelocity({-300.0f * std::cosf(getRotation() * M_PI / 180.0f), 300.0f * std::sinf(getRotation() * M_PI / 180.0f)});
-    bullet->setAcceleration({0.0f, -50.0f});
+
+    const auto radiansRotation = radiansFromDegrees(getRotation());
+    bullet->setVelocity({-bulletStartVelocity * std::cosf(radiansRotation), bulletStartVelocity * std::sinf(radiansRotation)});
+    bullet->setAcceleration({0.0f, gravity});
 
     m_energy -= energyPerBullet;
     m_bulletGeneratedHandler(bullet);

@@ -15,11 +15,10 @@ bool Bullet::init()
         return false;
 
     const auto image = Sprite::create("drop.png");
-    setContentSize(image->getContentSize());
-
     image->setAnchorPoint({0.0f, 0.0f});
     addChild(image);
 
+    setContentSize(image->getContentSize());
     return true;
 }
 
@@ -36,6 +35,7 @@ void Bullet::update(float delta)
     const auto worldPosition = getParent()->convertToWorldSpace(getPosition());
     const auto size = getContentSize();
 
+    // Bullets are destroyed outside screen.
     if (worldPosition.x + size.width < 0 || worldPosition.x - size.width > screenSize.width ||
         worldPosition.y + size.height < 0 || worldPosition.y - size.height > screenSize.height) {
         removeFromParent();
@@ -49,5 +49,6 @@ Rect Bullet::getCollisionBox() const
 
 void Bullet::onCollide(PhysicsBody* collideBody)
 {
+    // Bullet is destroyed after hitting another body.
     removeFromParent();
 }

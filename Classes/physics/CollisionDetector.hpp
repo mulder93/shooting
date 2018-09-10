@@ -13,7 +13,14 @@
 class CollisionDetector
 {
 public:
-    //TODO: copy/move?
+    CollisionDetector() = default;
+
+    CollisionDetector(const CollisionDetector&) = delete;
+    CollisionDetector& operator=(const CollisionDetector&) = delete;
+    
+    CollisionDetector(CollisionDetector&&) = default;
+    CollisionDetector& operator=(CollisionDetector&&) = default;
+
     void registerBody(PhysicsBody* body);
     void update(float delta);
 

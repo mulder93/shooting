@@ -9,32 +9,26 @@
 
 USING_NS_CC;
 
-namespace
-{
-    constexpr auto hitPoints = 15;
-}
-
 bool FastTarget::init()
 {
     if (!Target::init())
         return false;
 
-    const auto fly = Sprite::create("fly2.png");
-    setContentSize(fly->getContentSize());
+    const auto image = Sprite::create("fly2.png");
+    image->setAnchorPoint({0.0f, 0.0f});
+    addChild(image);
 
-    fly->setAnchorPoint({0.0f, 0.0f});
-    addChild(fly);
-
-    setAnchorPoint({0.0f, 0.0f});
-    setContentSize(fly->getContentSize());
-
+    // Random position by Y and off-screen position by X.
     const auto screenSize = Director::getInstance()->getVisibleSize();
     const auto positionY = random(0.0f, screenSize.height - getContentSize().height);
     setPosition(-getContentSize().width, positionY);
 
+    // Random velocity by X and no velocity by Y.
     const auto velocityX = random(200.0f, 300.0f);
     setVelocity({velocityX, 0.0f});
 
+    setAnchorPoint({0.0f, 0.0f});
+    setContentSize(image->getContentSize());
     return true;
 }
 

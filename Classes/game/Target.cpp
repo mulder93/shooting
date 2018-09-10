@@ -22,9 +22,8 @@ bool Target::init()
 
 void Target::onCollide(PhysicsBody* collideBody)
 {
-    if (auto bullet = dynamic_cast<Bullet*>(collideBody)) {
+    if (auto bullet = dynamic_cast<Bullet*>(collideBody))
         onCollide(bullet);
-    }
 }
 
 void Target::onCollide(Bullet* bullet)
@@ -32,9 +31,9 @@ void Target::onCollide(Bullet* bullet)
     m_health--;
     const bool killed = (m_health <= 0);
 
-    if (killed)
-        removeFromParent();
-
     if (m_hitHandler)
         m_hitHandler(killed, killed ? getKillPoints() : getHitPoints());
+
+    if (killed)
+        removeFromParent();
 }

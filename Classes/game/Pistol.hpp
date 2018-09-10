@@ -29,9 +29,9 @@ public:
     void reset();
 
     float getEnergy() { return m_energy; }
-    float getMaxEnergy() { return 100; }
+    float getMaxEnergy() { return 100.0f; }
 
 private:
     BulletGeneratedHandler m_bulletGeneratedHandler;
-    float m_energy = 100;
+    float m_energy = 100.0f;
 };

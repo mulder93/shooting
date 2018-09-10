@@ -11,9 +11,8 @@ USING_NS_CC;
 
 EventListenerHolder::~EventListenerHolder()
 {
-    for (const auto listener : m_listeners) {
+    for (const auto listener : m_listeners)
         Director::getInstance()->getEventDispatcher()->removeEventListener(listener);
-    }
 }
 
 void EventListenerHolder::addListener(EventListener* listener, Node* node)

@@ -14,7 +14,6 @@ class PhysicsBody : public cocos2d::Node
 {
 public:
     bool init() override;
-
     void update(float delta) override;
 
     const cocos2d::Vec2& getVelocity() { return m_velocity; }

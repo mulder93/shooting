@@ -13,7 +13,7 @@
 #include "Bullet.hpp"
 #include "EnergyBar.hpp"
 #include "CollisionDetector.hpp"
-#include "NodeUtils.hpp"
+#include "Helpers.hpp"
 
 USING_NS_CC;
 
@@ -272,7 +272,6 @@ void GameLayer::rotatePistol(const Vec2& inputPosition)
         return;
 
     const auto delta = m_pistol->getPosition() - inputPosition;
-    const auto angleRadians = -std::atanf(delta.y / delta.x);
-    const auto angleDegrees = clampf(angleRadians * 180.0f / static_cast<float>(M_PI), -60.0f, 60.0f);
-    m_pistol->setRotation(angleDegrees);
+    const auto angle = degreesFromRadians(-std::atanf(delta.y / delta.x));
+    m_pistol->setRotation(clampf(angle, -60.0f, 60.0f));
 }
