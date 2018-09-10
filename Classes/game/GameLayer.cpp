@@ -11,6 +11,7 @@
 #include "FastTarget.hpp"
 #include "Pistol.hpp"
 #include "Bullet.hpp"
+#include "EnergyBar.hpp"
 #include "CollisionDetector.hpp"
 #include "NodeUtils.hpp"
 
@@ -18,11 +19,22 @@ USING_NS_CC;
 
 namespace
 {
+
+#pragma mark - Non-member nodes creation
+
     auto createBackground()
     {
         const auto background = Sprite::create("background.jpg");
         background->setAnchorPoint({0.0f, 0.0f});
         return background;
+    }
+
+    auto createEnergyBar()
+    {
+        const auto bar = EnergyBar::create();
+        bar->setAnchorPoint({0.0f, 1.0f});
+        bar->setPosition({5.0f, Director::getInstance()->getVisibleSize().height - 5.0f});
+        return bar;
     }
 
     auto createTargetsHolder()
@@ -68,7 +80,12 @@ namespace
         label->setTextColor(Color4B::BLACK);
         return label;
     }
+
+#pragma mark -
+
 }
+
+#pragma mark - Initialization and nodes creation
 
 bool GameLayer::init()
 {
@@ -76,29 +93,15 @@ bool GameLayer::init()
         return false;
 
     scheduleUpdate();
-    m_collisionDetector = std::make_shared<CollisionDetector>();
 
+    m_collisionDetector = std::make_shared<CollisionDetector>();
     m_eventListenerHolder.addListener(createTouchListener(), this);
     m_eventListenerHolder.addListener(createMouseListener(), this);
 
     addChild(createBackground());
 
-    const auto screenSize = Director::getInstance()->getVisibleSize();
-    const auto barBackground = Sprite::create("bar_background.png");
-    barBackground->setAnchorPoint({0.0f, 1.0f});
-    barBackground->setPosition({5.0f, screenSize.height - 5.0f});
-    addChild(barBackground);
-
-    const auto bar = Sprite::create("bar.png");
-    bar->setAnchorPoint({0.0f, 0.5f});
-
-    m_energyBar = ProgressTimer::create(bar);
-    m_energyBar->setAnchorPoint({0.5f, 0.5f});
-    m_energyBar->setPosition({barBackground->getContentSize().width * 0.5f, barBackground->getContentSize().height * 0.5f});
-    m_energyBar->setType(ProgressTimer::Type::BAR);
-    m_energyBar->setMidpoint({0.0f, 0.5f});
-    m_energyBar->setBarChangeRate({1.0f, 0.0f});
-    barBackground->addChild(m_energyBar);
+    m_energyBar = createEnergyBar();
+    addChild(m_energyBar);
 
     m_pistol = createPistol();
     addChild(m_pistol);
@@ -120,20 +123,51 @@ bool GameLayer::init()
     return true;
 }
 
-cocos2d::EventListener* GameLayer::createTouchListener()
+Pistol* GameLayer::createPistol() const
 {
-    const auto touchListener = EventListenerTouchOneByOne::create();
-    touchListener->onTouchBegan = CC_CALLBACK_2(GameLayer::onTouchBegan, this);
-    touchListener->onTouchMoved = CC_CALLBACK_2(GameLayer::onTouchMoved, this);
-    return touchListener;
+    const auto pistol = Pistol::create();
+    pistol->setAnchorPoint({0.8f, 0.5f});
+
+    const auto screenSize = Director::getInstance()->getVisibleSize();
+    pistol->setPosition({screenSize.width - 20.0f, screenSize.height * 0.5f});
+
+    pistol->setBulletGeneratedHandler([this](Bullet* bullet) {
+        convertToAnotherNodeSpace(bullet, m_pistol, m_targetsHolder);
+        m_targetsHolder->addChild(bullet);
+        m_collisionDetector->registerBody(bullet);
+    });
+
+    return pistol;
 }
 
-cocos2d::EventListener* GameLayer::createMouseListener()
+void GameLayer::resetTargets()
 {
-    const auto mouseListener = EventListenerMouse::create();
-    mouseListener->onMouseMove = CC_CALLBACK_1(GameLayer::onMouseMoved, this);
-    return mouseListener;
+    m_targetsHolder->removeAllChildrenWithCleanup(true);
+
+    for (auto i = 0; i < 30; ++i) {
+        addTarget(SimpleTarget::create());
+    }
+
+    for (auto i = 0; i < 5; ++i) {
+        const auto scheduleKey = StringUtils::format("fast_target_%d", i);
+        m_targetsHolder->scheduleOnce([this](float) {
+            addTarget(FastTarget::create());
+        }, random(0.0f, m_timeLeft - 2.0f), scheduleKey);
+    }
 }
+
+void GameLayer::addTarget(Target* target)
+{
+    target->setHitHandler([this](bool killed, int points) {
+        m_score += points;
+        updateScoreLabel();
+    });
+
+    m_targetsHolder->addChild(target);
+    m_collisionDetector->registerBody(target);
+}
+
+#pragma mark - Game
 
 void GameLayer::startGame()
 {
@@ -157,74 +191,20 @@ void GameLayer::endGame()
     showResults();
 }
 
-Pistol* GameLayer::createPistol() const
-{
-    const auto pistol = Pistol::create();
-    pistol->setAnchorPoint({0.8f, 0.5f});
-
-    const auto screenSize = Director::getInstance()->getVisibleSize();
-    pistol->setPosition({screenSize.width - 20.0f, screenSize.height * 0.5f});
-
-    pistol->setBulletGeneratedHandler([this](Bullet* bullet) {
-        convertToAnotherNodeSpace(bullet, m_pistol, m_targetsHolder);
-        m_targetsHolder->addChild(bullet);
-        m_collisionDetector->registerBody(bullet);
-    });
-
-    return pistol;
-}
-
-void GameLayer::resetTargets()
-{
-    m_targetsHolder->removeAllChildrenWithCleanup(true);
-    
-    for (auto i = 0; i < 30; ++i) {
-        const auto target = SimpleTarget::create();
-        target->setHitHandler([this](bool killed, int points) {
-            m_score += points;
-            updateScoreLabel();
-
-//            if (m_targetsHolder->getChildrenCount() == 0) {
-//                endGame();
-//            }
-        });
-
-        m_targetsHolder->addChild(target);
-        m_collisionDetector->registerBody(target);
-    }
-
-    for (auto i = 0; i < 5; ++i) {
-        m_targetsHolder->scheduleOnce([this](float) {
-            const auto target = FastTarget::create();
-            target->setHitHandler([this](bool killed, int points) {
-                m_score += points;
-                updateScoreLabel();
-
-//                if (m_targetsHolder->getChildrenCount() == 0) {
-//                    endGame();
-//                }
-            });
-            m_targetsHolder->addChild(target);
-            m_collisionDetector->registerBody(target);
-        }, random(0.0f, m_timeLeft - 2.0f), std::string("fast_target") + std::to_string(i));
-    }
-}
-
 void GameLayer::updateScoreLabel()
 {
-    m_scoreLabel->setString(std::string("Score: ") + std::to_string(m_score));
+    m_scoreLabel->setString(StringUtils::format("Score: %d", m_score));
 }
 
 void GameLayer::updateTimerLabel()
 {
     const auto secondsLeft = static_cast<int>(std::ceilf(m_timeLeft));
-    m_timerLabel->setString(std::string("Time: ") + std::to_string(secondsLeft));
+    m_timerLabel->setString(StringUtils::format("Time: %d", secondsLeft));
 }
 
 void GameLayer::showResults()
 {
-    const auto resultString = std::string("Final score: ") + std::to_string(m_score) + std::string("\nTap to restart");
-    m_resultLabel->setString(resultString);
+    m_resultLabel->setString(StringUtils::format("Final score: %d\nTap to restart", m_score));
     m_resultLabel->setVisible(true);
 }
 
@@ -234,7 +214,7 @@ void GameLayer::update(float delta)
         return;
 
     m_collisionDetector->update(delta);
-    m_energyBar->setPercentage(100.0f * m_pistol->getEnergy() / m_pistol->getMaxEnergy());
+    m_energyBar->setPercent(100.0f * m_pistol->getEnergy() / m_pistol->getMaxEnergy());
 
     m_timeLeft = std::max(0.0f, m_timeLeft - delta);
     updateTimerLabel();
@@ -243,37 +223,56 @@ void GameLayer::update(float delta)
         endGame();
 }
 
+#pragma mark - Input
+
+cocos2d::EventListener* GameLayer::createTouchListener()
+{
+    const auto touchListener = EventListenerTouchOneByOne::create();
+    touchListener->onTouchBegan = CC_CALLBACK_2(GameLayer::onTouchBegan, this);
+    touchListener->onTouchMoved = CC_CALLBACK_2(GameLayer::onTouchMoved, this);
+    return touchListener;
+}
+
+cocos2d::EventListener* GameLayer::createMouseListener()
+{
+    const auto mouseListener = EventListenerMouse::create();
+    mouseListener->onMouseMove = CC_CALLBACK_1(GameLayer::onMouseMoved, this);
+    return mouseListener;
+}
+
 bool GameLayer::onTouchBegan(Touch *touch, Event *event)
 {
     if (m_playing) {
+        rotatePistol(touch->getLocation());
         m_pistol->shoot();
     } else {
         startGame();
     }
-
     return true;
 }
 
 void GameLayer::onTouchMoved(cocos2d::Touch *touch, cocos2d::Event *event)
 {
-//    onInputMoved(touch->getLocation(), touch->getPreviousLocation());
+    rotatePistol(touch->getLocation());
 }
 
 void GameLayer::onMouseMoved(EventMouse* event)
 {
-    const auto mousePosition = Vec2(event->getCursorX(), event->getCursorY());
-    const auto delta = m_pistol->getPosition() - mousePosition;
-    const auto angleRadians = -std::atanf(delta.y / delta.x);
-    const auto angleDegrees = std::max(-60.0f, std::min(60.0f, angleRadians * 180.0f / static_cast<float>(M_PI)));
-    m_pistol->setRotation(angleDegrees);
+    rotatePistol({event->getCursorX(), event->getCursorY()});
 }
 
-//void GameLayer::onInputMoved(const Vec2& location, const Vec2& previousLocation)
-//{
-//    if (!m_playing)
-//        return;
-//
-//    const auto angleDiff = (location.y - previousLocation.y) * 1.5f;
-//    const auto newAngle = std::max(-60.0f, std::min(60.0f, m_pistol->getRotation() + angleDiff));
-//    m_pistol->setRotation(newAngle);
-//}
+void GameLayer::rotatePistol(const Vec2& inputPosition)
+{
+    if (inputPosition.x >= m_pistol->getPosition().x)
+        return;
+
+    const auto screenSize = Director::getInstance()->getVisibleSize();
+    if (inputPosition.x < 0.0f || screenSize.width < inputPosition.x ||
+        inputPosition.y < 0.0f || screenSize.height < inputPosition.y)
+        return;
+
+    const auto delta = m_pistol->getPosition() - inputPosition;
+    const auto angleRadians = -std::atanf(delta.y / delta.x);
+    const auto angleDegrees = clampf(angleRadians * 180.0f / static_cast<float>(M_PI), -60.0f, 60.0f);
+    m_pistol->setRotation(angleDegrees);
+}

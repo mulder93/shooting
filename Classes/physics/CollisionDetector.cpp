@@ -18,17 +18,7 @@ void CollisionDetector::update(float delta)
         for (int j = i + 1; j < m_bodies.size(); ++j) {
             const auto firstBody = m_bodies.at(i);
             const auto secondBody = m_bodies.at(j);
-            if (!firstBody->getParent() || !secondBody->getParent())
-                continue;
-
-            const auto firstWorldCollisionBox = cocos2d::Rect(
-                firstBody->getParent()->convertToWorldSpace(firstBody->getCollisionBox().origin),
-                firstBody->getCollisionBox().size);
-            const auto secondWorldCollisionBox = cocos2d::Rect(
-                secondBody->getParent()->convertToWorldSpace(secondBody->getCollisionBox().origin),
-                secondBody->getCollisionBox().size);
-
-            if (firstWorldCollisionBox.intersectsRect(secondWorldCollisionBox)) {
+            if (firstBody->getCollisionBox().intersectsRect(secondBody->getCollisionBox())) {
                 firstBody->onCollide(secondBody);
                 secondBody->onCollide(firstBody);
             }
@@ -37,6 +27,7 @@ void CollisionDetector::update(float delta)
 
     auto iterator = m_bodies.begin();
     while (iterator != m_bodies.cend()) {
+        // Emulation of weak-reference for bodies in CollisionDetector.
         if ((*iterator)->getReferenceCount() == 1) {
             iterator = m_bodies.erase(iterator);
         } else {

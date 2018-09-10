@@ -11,6 +11,8 @@
 
 class CollisionDetector;
 class Pistol;
+class EnergyBar;
+class Target;
 
 class GameLayer : public cocos2d::Layer
 {
@@ -33,20 +35,25 @@ private:
 
     Pistol* createPistol() const;
     void resetTargets();
+    void generateFastTarget(float);
+    void addTarget(Target* target);
 
     void updateScoreLabel();
     void updateTimerLabel();
     void showResults();
 
+    void rotatePistol(const cocos2d::Vec2& inputPosition);
+
     EventListenerHolder m_eventListenerHolder;
     std::shared_ptr<CollisionDetector> m_collisionDetector;
-    Pistol* m_pistol = nullptr;
-    cocos2d::Node* m_targetsHolder = nullptr;
 
+    cocos2d::Node* m_targetsHolder = nullptr;
     cocos2d::Label* m_scoreLabel = nullptr;
     cocos2d::Label* m_timerLabel = nullptr;
     cocos2d::Label* m_resultLabel = nullptr;
-    cocos2d::ProgressTimer* m_energyBar = nullptr;
+
+    Pistol* m_pistol = nullptr;
+    EnergyBar* m_energyBar = nullptr;
 
     int m_score = 0;
     float m_timeLeft = 50.0f;

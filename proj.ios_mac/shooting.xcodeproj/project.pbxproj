@@ -87,6 +87,8 @@
 		C6ADD2B221455AC9002517E8 /* EventListenerHolder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6ADD2AF21455AC9002517E8 /* EventListenerHolder.cpp */; };
 		C6ADD2B521456181002517E8 /* NodeUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6ADD2B321456181002517E8 /* NodeUtils.cpp */; };
 		C6ADD2B621456181002517E8 /* NodeUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6ADD2B321456181002517E8 /* NodeUtils.cpp */; };
+		C6ADD2BD2146F5A5002517E8 /* EnergyBar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6ADD2BB2146F5A5002517E8 /* EnergyBar.cpp */; };
+		C6ADD2BE2146F5A5002517E8 /* EnergyBar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6ADD2BB2146F5A5002517E8 /* EnergyBar.cpp */; };
 		D44C620C132DFF330009C878 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620B132DFF330009C878 /* OpenAL.framework */; };
 		D44C620E132DFF430009C878 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620D132DFF430009C878 /* AVFoundation.framework */; };
 		D44C6210132DFF4E0009C878 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620F132DFF4E0009C878 /* AudioToolbox.framework */; };
@@ -203,6 +205,8 @@
 		C6ADD2B021455AC9002517E8 /* EventListenerHolder.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EventListenerHolder.hpp; sourceTree = "<group>"; };
 		C6ADD2B321456181002517E8 /* NodeUtils.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = NodeUtils.cpp; sourceTree = "<group>"; };
 		C6ADD2B421456181002517E8 /* NodeUtils.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = NodeUtils.hpp; sourceTree = "<group>"; };
+		C6ADD2BB2146F5A5002517E8 /* EnergyBar.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EnergyBar.cpp; sourceTree = "<group>"; };
+		C6ADD2BC2146F5A5002517E8 /* EnergyBar.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EnergyBar.hpp; sourceTree = "<group>"; };
 		D44C620B132DFF330009C878 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		D44C620D132DFF430009C878 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D44C620F132DFF4E0009C878 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -404,6 +408,8 @@
 				C6ADD28C214077E6002517E8 /* Bullet.hpp */,
 				C6ADD29C2143E92E002517E8 /* FastTarget.cpp */,
 				C6ADD29D2143E92E002517E8 /* FastTarget.hpp */,
+				C6ADD2BB2146F5A5002517E8 /* EnergyBar.cpp */,
+				C6ADD2BC2146F5A5002517E8 /* EnergyBar.hpp */,
 			);
 			path = game;
 			sourceTree = "<group>";
@@ -594,6 +600,7 @@
 				C6ADD29421432022002517E8 /* GameLayer.cpp in Sources */,
 				C6ADD28D214077E6002517E8 /* Bullet.cpp in Sources */,
 				C6ADD27E213BF6D0002517E8 /* PhysicsBody.cpp in Sources */,
+				C6ADD2BD2146F5A5002517E8 /* EnergyBar.cpp in Sources */,
 				C6ADD267213BC28F002517E8 /* MainScene.cpp in Sources */,
 				C6ADD26F213BCDB7002517E8 /* Target.cpp in Sources */,
 			);
@@ -612,6 +619,7 @@
 				C6ADD2B221455AC9002517E8 /* EventListenerHolder.cpp in Sources */,
 				C6ADD28E214077E6002517E8 /* Bullet.cpp in Sources */,
 				C6ADD29521432022002517E8 /* GameLayer.cpp in Sources */,
+				C6ADD2BE2146F5A5002517E8 /* EnergyBar.cpp in Sources */,
 				C6ADD283213DC17C002517E8 /* CollisionDetector.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
 				C6ADD2B621456181002517E8 /* NodeUtils.cpp in Sources */,

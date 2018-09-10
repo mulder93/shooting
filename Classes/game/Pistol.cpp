@@ -60,5 +60,4 @@ void Pistol::reset()
 {
     setRotation(0.0f);
     m_energy = getMaxEnergy();
-    // TODO: remove all bullets
 }
