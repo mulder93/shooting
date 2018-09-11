@@ -20,6 +20,20 @@ bool Target::init()
     return true;
 }
 
+void Target::update(float delta)
+{
+    PhysicsBody::update(delta);
+
+    const auto screenSize = Director::getInstance()->getVisibleSize();
+    const auto worldPosition = getParent()->convertToWorldSpace(getPosition());
+    const auto size = getContentSize();
+
+    // Targets are destroyed outside screen to the right.
+    // (because for now all targets are created on the left and moving to the right)
+    if (worldPosition.x - size.width > screenSize.width)
+        removeFromParent();
+}
+
 void Target::onCollide(PhysicsBody* collideBody)
 {
     if (auto bullet = dynamic_cast<Bullet*>(collideBody))

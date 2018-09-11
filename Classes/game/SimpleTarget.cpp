@@ -42,7 +42,7 @@ SimpleTarget::~SimpleTarget()
 
 void SimpleTarget::update(float delta)
 {
-    PhysicsBody::update(delta);
+    Target::update(delta);
 
     const auto screenSize = Director::getInstance()->getVisibleSize();
     if (getPositionY() <= 0 || screenSize.height - getContentSize().height <= getPositionY())

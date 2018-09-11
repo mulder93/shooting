@@ -17,6 +17,8 @@ public:
     using HitHandler = std::function<void(bool killed, int points)>;
 
     bool init() override;
+    void update(float delta) override;
+
     void onCollide(PhysicsBody* collideBody) override;
 
     void setHitHandler(HitHandler handler) { m_hitHandler = std::move(handler); }
