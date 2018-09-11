@@ -13,9 +13,8 @@
 class SimpleTarget : public Target
 {
 public:
-    bool init() override;
-    bool init(int baseSpeed);
-    static SimpleTarget* create(int baseSpeed);
+    bool init(int baseSpeed, cocos2d::Rect worldBounds);
+    static SimpleTarget* create(int baseSpeed, cocos2d::Rect worldBounds);
 
     ~SimpleTarget();
 

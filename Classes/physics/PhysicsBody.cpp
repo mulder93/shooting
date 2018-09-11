@@ -7,10 +7,13 @@
 
 #include "PhysicsBody.hpp"
 
+
 bool PhysicsBody::init()
 {
     if (!Node::init())
         return false;
+
+    m_worldBounds = cocos2d::Rect({0.0f, 0.0f}, cocos2d::Director::getInstance()->getVisibleSize());
 
     scheduleUpdate();
 

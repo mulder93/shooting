@@ -10,24 +10,20 @@
 
 USING_NS_CC;
 
-bool SimpleTarget::init()
-{
-    return init(20);
-}
-
-bool SimpleTarget::init(int baseSpeed)
+bool SimpleTarget::init(int baseSpeed, cocos2d::Rect worldBounds)
 {
     if (!Target::init())
         return false;
+
+    setWorldBounds(std::move(worldBounds));
 
     const auto image = Sprite::create("fly4.png");
     image->setAnchorPoint({0.0f, 0.0f});
     addChild(image);
 
     // Random position by X and Y.
-    const auto screenSize = Director::getInstance()->getVisibleSize();
     const auto positionX = random(-150.0f, 200.0f);
-    const auto positionY = random(0.0f, screenSize.height - getContentSize().height);
+    const auto positionY = random(getWorldBounds().getMinY(), getWorldBounds().getMaxY() - getContentSize().height);
     setPosition(positionX, positionY);
 
     // Random velocity by X and Y.
@@ -40,10 +36,10 @@ bool SimpleTarget::init(int baseSpeed)
     return true;
 }
 
-SimpleTarget* SimpleTarget::create(int baseSpeed)
+SimpleTarget* SimpleTarget::create(int baseSpeed, cocos2d::Rect worldBounds)
 {
     SimpleTarget* target = new (std::nothrow)SimpleTarget();
-    if (target && target->init(baseSpeed)) {
+    if (target && target->init(baseSpeed, std::move(worldBounds))) {
         target->autorelease();
         return target;
     }
@@ -60,8 +56,7 @@ void SimpleTarget::update(float delta)
 {
     Target::update(delta);
 
-    const auto screenSize = Director::getInstance()->getVisibleSize();
-    if (getPositionY() <= 0 || screenSize.height - getContentSize().height <= getPositionY())
+    if (getPositionY() <= getWorldBounds().getMinY() || getWorldBounds().getMaxY() <= getPositionY())
         changeMovingDirection();
 }
 

@@ -15,6 +15,7 @@ public:
     Configuration();
 
     int getTargetsCount() { return m_targetsCount; }
+    int getFastTargetsCount() { return m_fastTargetsCount; }
     int getSpeed() { return m_speed; }
     int getTime() { return m_time; }
 
@@ -24,6 +25,7 @@ private:
     std::unordered_map<std::string, int> m_fileParams;
 
     int m_targetsCount;
+    int m_fastTargetsCount;
     int m_speed;
     int m_time;
 };

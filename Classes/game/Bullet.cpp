@@ -31,13 +31,12 @@ void Bullet::update(float delta)
 {
     PhysicsBody::update(delta);
 
-    const auto screenSize = Director::getInstance()->getVisibleSize();
     const auto worldPosition = getParent()->convertToWorldSpace(getPosition());
     const auto size = getContentSize();
 
     // Bullets are destroyed outside screen.
-    if (worldPosition.x + size.width < 0 || worldPosition.x - size.width > screenSize.width ||
-        worldPosition.y + size.height < 0 || worldPosition.y - size.height > screenSize.height) {
+    if (worldPosition.x + size.width < getWorldBounds().getMinX() || worldPosition.x - size.width > getWorldBounds().getMaxX() ||
+        worldPosition.y + size.height < getWorldBounds().getMinY() || worldPosition.y - size.height > getWorldBounds().getMaxY()) {
         removeFromParent();
     }
 }

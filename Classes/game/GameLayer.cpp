@@ -81,6 +81,12 @@ namespace
         return label;
     }
 
+    auto getWorldBounds()
+    {
+        const auto screenSize = Director::getInstance()->getVisibleSize();
+        return Rect(0.0f, 55.0f, screenSize.width, screenSize.height - 95.0f);
+    }
+
 #pragma mark -
 
 }
@@ -132,6 +138,7 @@ Pistol* GameLayer::createPistol() const
     pistol->setPosition({screenSize.width - 20.0f, screenSize.height * 0.5f});
 
     pistol->setBulletGeneratedHandler([this](Bullet* bullet) {
+        bullet->setWorldBounds(getWorldBounds());
         convertToAnotherNodeSpace(bullet, m_pistol, m_targetsHolder);
         m_targetsHolder->addChild(bullet);
         m_collisionDetector->registerBody(bullet);
@@ -145,13 +152,13 @@ void GameLayer::resetTargets()
     m_targetsHolder->removeAllChildrenWithCleanup(true);
 
     for (auto i = 0; i < m_configuration.getTargetsCount(); ++i) {
-        addTarget(SimpleTarget::create(m_configuration.getSpeed()));
+        addTarget(SimpleTarget::create(m_configuration.getSpeed(), getWorldBounds()));
     }
 
-    for (auto i = 0; i < 5; ++i) {
+    for (auto i = 0; i < m_configuration.getFastTargetsCount(); ++i) {
         const auto scheduleKey = StringUtils::format("fast_target_%d", i);
         m_targetsHolder->scheduleOnce([this](float) {
-            addTarget(FastTarget::create());
+            addTarget(FastTarget::create(m_configuration.getSpeed(), getWorldBounds()));
         }, random(0.0f, m_timeLeft - 2.0f), scheduleKey);
     }
 }

@@ -24,9 +24,15 @@ public:
 
     virtual cocos2d::Rect getCollisionBox() const { return getBoundingBox(); }
 
+    void setWorldBounds(cocos2d::Rect bounds) { m_worldBounds = std::move(bounds); }
+
     virtual void onCollide(PhysicsBody* collideBody) {}
 
+protected:
+    const cocos2d::Rect& getWorldBounds() const { return m_worldBounds; }
+
 private:
+    cocos2d::Rect m_worldBounds;
     cocos2d::Vec2 m_velocity{0.0f, 0.0f};
     cocos2d::Vec2 m_acceleration{0.0f, 0.0f};
 };

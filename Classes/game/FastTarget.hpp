@@ -12,8 +12,8 @@
 class FastTarget : public Target
 {
 public:
-    CREATE_FUNC(FastTarget);
-    bool init() override;
+    bool init(int baseSpeed, cocos2d::Rect worldBounds);
+    static FastTarget* create(int baseSpeed, cocos2d::Rect worldBounds);
     ~FastTarget();
 
 private:
