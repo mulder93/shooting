@@ -13,8 +13,10 @@
 class SimpleTarget : public Target
 {
 public:
-    CREATE_FUNC(SimpleTarget);
     bool init() override;
+    bool init(int baseSpeed);
+    static SimpleTarget* create(int baseSpeed);
+
     ~SimpleTarget();
 
     void update(float delta) override;

@@ -8,6 +8,7 @@
 #include <memory>
 #include "cocos2d.h"
 #include "EventListenerHolder.hpp"
+#include "Configuration.hpp"
 
 class CollisionDetector;
 class Pistol;
@@ -46,6 +47,7 @@ private:
 
     EventListenerHolder m_eventListenerHolder;
     std::shared_ptr<CollisionDetector> m_collisionDetector;
+    Configuration m_configuration;
 
     cocos2d::Node* m_targetsHolder = nullptr;
     cocos2d::Label* m_scoreLabel = nullptr;
@@ -55,7 +57,7 @@ private:
     Pistol* m_pistol = nullptr;
     EnergyBar* m_energyBar = nullptr;
 
-    int m_score = 0;
-    float m_timeLeft = 50.0f;
+    int m_score;
+    float m_timeLeft;
     bool m_playing = false;
 };

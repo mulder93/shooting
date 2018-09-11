@@ -144,8 +144,8 @@ void GameLayer::resetTargets()
 {
     m_targetsHolder->removeAllChildrenWithCleanup(true);
 
-    for (auto i = 0; i < 30; ++i) {
-        addTarget(SimpleTarget::create());
+    for (auto i = 0; i < m_configuration.getTargetsCount(); ++i) {
+        addTarget(SimpleTarget::create(m_configuration.getSpeed()));
     }
 
     for (auto i = 0; i < 5; ++i) {
@@ -174,7 +174,7 @@ void GameLayer::startGame()
     m_score = 0;
     updateScoreLabel();
 
-    m_timeLeft = 30.0f;
+    m_timeLeft = m_configuration.getTime();
     updateTimerLabel();
 
     m_pistol->reset();

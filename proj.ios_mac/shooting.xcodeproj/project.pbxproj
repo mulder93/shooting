@@ -47,6 +47,10 @@
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
 		BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1C47EA1293683800B63C5D /* QuartzCore.framework */; };
+		C615B8D0214832DF00B973EE /* Configuration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C615B8CE214832DF00B973EE /* Configuration.cpp */; };
+		C615B8D1214832DF00B973EE /* Configuration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C615B8CE214832DF00B973EE /* Configuration.cpp */; };
+		C615B8D42148335100B973EE /* input.txt in Resources */ = {isa = PBXBuildFile; fileRef = C615B8D32148335100B973EE /* input.txt */; };
+		C615B8D52148335100B973EE /* input.txt in Resources */ = {isa = PBXBuildFile; fileRef = C615B8D32148335100B973EE /* input.txt */; };
 		C6ADD267213BC28F002517E8 /* MainScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6ADD265213BC28F002517E8 /* MainScene.cpp */; };
 		C6ADD269213BC297002517E8 /* MainScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6ADD265213BC28F002517E8 /* MainScene.cpp */; };
 		C6ADD26B213BC809002517E8 /* background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C6ADD26A213BC809002517E8 /* background.jpg */; };
@@ -174,6 +178,9 @@
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		BF1C47EA1293683800B63C5D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		C615B8CE214832DF00B973EE /* Configuration.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Configuration.cpp; sourceTree = "<group>"; };
+		C615B8CF214832DF00B973EE /* Configuration.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Configuration.hpp; sourceTree = "<group>"; };
+		C615B8D32148335100B973EE /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
 		C6ADD265213BC28F002517E8 /* MainScene.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MainScene.cpp; sourceTree = "<group>"; };
 		C6ADD266213BC28F002517E8 /* MainScene.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MainScene.hpp; sourceTree = "<group>"; };
 		C6ADD26A213BC809002517E8 /* background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background.jpg; sourceTree = "<group>"; };
@@ -353,6 +360,7 @@
 				46880B7A19C43A67006E1F66 /* HelloWorld.png */,
 				C6ADD284214071E5002517E8 /* pistol.png */,
 				C6ADD28F214079BF002517E8 /* drop.png */,
+				C615B8D32148335100B973EE /* input.txt */,
 			);
 			name = Resources;
 			path = ../Resources;
@@ -421,6 +429,8 @@
 				C6ADD2B021455AC9002517E8 /* EventListenerHolder.hpp */,
 				C6ADD2B321456181002517E8 /* Helpers.cpp */,
 				C6ADD2B421456181002517E8 /* Helpers.hpp */,
+				C615B8CE214832DF00B973EE /* Configuration.cpp */,
+				C615B8CF214832DF00B973EE /* Configuration.hpp */,
 			);
 			path = utility;
 			sourceTree = "<group>";
@@ -555,6 +565,7 @@
 				46880B7B19C43A67006E1F66 /* CloseNormal.png in Resources */,
 				C6ADD29A2143E846002517E8 /* fly2.png in Resources */,
 				1AF87B881F6F781D007BE51C /* LaunchScreen.storyboard in Resources */,
+				C615B8D42148335100B973EE /* input.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -569,6 +580,7 @@
 				3EACC99019EE6D4300EB3C5E /* res in Resources */,
 				C6ADD2A22143F050002517E8 /* fly3.png in Resources */,
 				C6ADD2AB21440D91002517E8 /* bar.png in Resources */,
+				C615B8D52148335100B973EE /* input.txt in Resources */,
 				C6ADD2A52143F0BA002517E8 /* fly4.png in Resources */,
 				C6ADD2A921440D91002517E8 /* bar_background.png in Resources */,
 				521A8EAA19F11F5000D177D7 /* fonts in Resources */,
@@ -595,6 +607,7 @@
 				46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				C6ADD282213DC17C002517E8 /* CollisionDetector.cpp in Sources */,
 				1AF87B8A1F6F7822007BE51C /* main.m in Sources */,
+				C615B8D0214832DF00B973EE /* Configuration.cpp in Sources */,
 				C6ADD2892140721C002517E8 /* Pistol.cpp in Sources */,
 				C6ADD2B521456181002517E8 /* Helpers.cpp in Sources */,
 				C6ADD29421432022002517E8 /* GameLayer.cpp in Sources */,
@@ -617,6 +630,7 @@
 				C6ADD269213BC297002517E8 /* MainScene.cpp in Sources */,
 				C6ADD270213BCDB7002517E8 /* Target.cpp in Sources */,
 				C6ADD2B221455AC9002517E8 /* EventListenerHolder.cpp in Sources */,
+				C615B8D1214832DF00B973EE /* Configuration.cpp in Sources */,
 				C6ADD28E214077E6002517E8 /* Bullet.cpp in Sources */,
 				C6ADD29521432022002517E8 /* GameLayer.cpp in Sources */,
 				C6ADD2BE2146F5A5002517E8 /* EnergyBar.cpp in Sources */,

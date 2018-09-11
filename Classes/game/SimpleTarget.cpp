@@ -12,6 +12,11 @@ USING_NS_CC;
 
 bool SimpleTarget::init()
 {
+    return init(20);
+}
+
+bool SimpleTarget::init(int baseSpeed)
+{
     if (!Target::init())
         return false;
 
@@ -21,18 +26,29 @@ bool SimpleTarget::init()
 
     // Random position by X and Y.
     const auto screenSize = Director::getInstance()->getVisibleSize();
-    const auto positionX = random(-100.0f, 200.0f);
+    const auto positionX = random(-150.0f, 200.0f);
     const auto positionY = random(0.0f, screenSize.height - getContentSize().height);
     setPosition(positionX, positionY);
 
     // Random velocity by X and Y.
-    const auto velocityX = random(5.0f, 20.0f);
-    const auto velocityY = random(10.0f, 30.0f) * (rand_0_1() > 0.5f ? -1.0f : 1.0f);
+    const auto velocityX = random(std::min(5.0f, baseSpeed - 10.0f), baseSpeed + 10.0f);
+    const auto velocityY = random(std::min(10.0f, baseSpeed - 15.0f), baseSpeed + 15.0f) * (rand_0_1() > 0.5f ? -1.0f : 1.0f);
     setVelocity({velocityX, velocityY});
 
     setAnchorPoint({0.0f, 0.0f});
     setContentSize(image->getContentSize());
     return true;
+}
+
+SimpleTarget* SimpleTarget::create(int baseSpeed)
+{
+    SimpleTarget* target = new (std::nothrow)SimpleTarget();
+    if (target && target->init(baseSpeed)) {
+        target->autorelease();
+        return target;
+    }
+    CC_SAFE_DELETE(target);
+    return nullptr;
 }
 
 SimpleTarget::~SimpleTarget()
