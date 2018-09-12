@@ -15,7 +15,7 @@ USING_NS_CC;
 namespace
 {
     constexpr auto energyPerBullet = 15.0f;
-    constexpr auto energyRestoringSpeed = 15.0f;
+    constexpr auto energyRestoringSpeed = 20.0f;
     constexpr auto bulletStartVelocity = 300.0f;
     constexpr auto gravity = -50.0f;
 }

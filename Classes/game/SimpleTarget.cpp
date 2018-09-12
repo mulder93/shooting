@@ -7,6 +7,7 @@
 
 #include "SimpleTarget.hpp"
 #include "Bullet.hpp"
+#include "Helpers.hpp"
 
 USING_NS_CC;
 
@@ -17,8 +18,7 @@ bool SimpleTarget::init(int baseSpeed, cocos2d::Rect worldBounds)
 
     setWorldBounds(std::move(worldBounds));
 
-    const auto image = Sprite::create("fly4.png");
-    image->setAnchorPoint({0.0f, 0.0f});
+    const auto image = createAnimatedImage();
     addChild(image);
 
     // Random position by X and Y.
@@ -34,6 +34,21 @@ bool SimpleTarget::init(int baseSpeed, cocos2d::Rect worldBounds)
     setAnchorPoint({0.0f, 0.0f});
     setContentSize(image->getContentSize());
     return true;
+}
+
+Node* SimpleTarget::createAnimatedImage()
+{
+    const auto frames = getAnimationFrames("fly2_%d.png", 4);
+    auto image = Sprite::createWithSpriteFrame(frames.front());
+    image->setAnchorPoint({0.0f, 0.0f});
+
+    scheduleOnce([image, frames](float) {
+        const auto animation = Animation::createWithSpriteFrames(frames, 1.0f / 25);
+        const auto flySequence = Sequence::create(Animate::create(animation), Animate::create(animation)->reverse(), nullptr);
+        image->runAction(RepeatForever::create(flySequence));
+    }, random(0.0f, 1.0f / 5), StringUtils::format("fly %p", this));
+
+    return image;
 }
 
 SimpleTarget* SimpleTarget::create(int baseSpeed, cocos2d::Rect worldBounds)

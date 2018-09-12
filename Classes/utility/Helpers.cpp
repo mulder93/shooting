@@ -27,3 +27,13 @@ float degreesFromRadians(float angle)
 {
     return angle * 180.0f / static_cast<float>(M_PI);
 }
+
+Vector<SpriteFrame*> getAnimationFrames(const std::string& nameFormat, int count)
+{
+    const auto spriteCache = SpriteFrameCache::getInstance();
+    Vector<SpriteFrame*> frames;
+    for (int i = 1; i <= count; i++) {
+        frames.pushBack(spriteCache->getSpriteFrameByName(StringUtils::format(nameFormat.c_str(), i)));
+    }
+    return frames;
+}

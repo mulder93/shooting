@@ -24,6 +24,8 @@ public:
     void onCollide(PhysicsBody* collideBody) override;
 
 private:
+    cocos2d::Node* createAnimatedImage();
+
     void onCollide(SimpleTarget* collideTarget);
 
     int getMaxHealth() override { return 1; }

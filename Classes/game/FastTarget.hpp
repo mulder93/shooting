@@ -17,6 +17,8 @@ public:
     ~FastTarget();
 
 private:
+    cocos2d::Node* createAnimatedImage();
+    
     int getMaxHealth() override { return 1; }
     int getHitPoints() override { return 0; }
     int getKillPoints() override { return 15; }

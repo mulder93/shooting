@@ -13,3 +13,5 @@ void convertToAnotherNodeSpace(cocos2d::Node* targetNode, const cocos2d::Node* o
 
 float radiansFromDegrees(float angle);
 float degreesFromRadians(float angle);
+
+cocos2d::Vector<cocos2d::SpriteFrame*> getAnimationFrames(const std::string& nameFormat, int count);

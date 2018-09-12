@@ -15,6 +15,8 @@ bool MainScene::init()
     if (!Scene::init())
         return false;
 
+    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("fly.plist");
+
     addChild(GameLayer::create());
 
     return true;

@@ -6,6 +6,7 @@
 //
 
 #include "FastTarget.hpp"
+#include "Helpers.hpp"
 
 USING_NS_CC;
 
@@ -16,8 +17,7 @@ bool FastTarget::init(int baseSpeed, cocos2d::Rect worldBounds)
 
     setWorldBounds(std::move(worldBounds));
 
-    const auto image = Sprite::create("fly2.png");
-    image->setAnchorPoint({0.0f, 0.0f});
+    const auto image = createAnimatedImage();
     addChild(image);
 
     // Random position by Y and off-screen position by X.
@@ -31,6 +31,21 @@ bool FastTarget::init(int baseSpeed, cocos2d::Rect worldBounds)
     setAnchorPoint({0.0f, 0.0f});
     setContentSize(image->getContentSize());
     return true;
+}
+
+Node* FastTarget::createAnimatedImage()
+{
+    const auto frames = getAnimationFrames("fly4_%d.png", 4);
+    auto image = Sprite::createWithSpriteFrame(frames.front());
+    image->setAnchorPoint({0.0f, 0.0f});
+
+    scheduleOnce([image, frames](float) {
+        const auto animation = Animation::createWithSpriteFrames(frames, 1.0f / 25);
+        const auto flySequence = Sequence::create(Animate::create(animation), Animate::create(animation)->reverse(), nullptr);
+        image->runAction(RepeatForever::create(flySequence));
+    }, random(0.0f, 1.0f / 5), StringUtils::format("fly %p", this));
+
+    return image;
 }
 
 FastTarget* FastTarget::create(int baseSpeed, cocos2d::Rect worldBounds)

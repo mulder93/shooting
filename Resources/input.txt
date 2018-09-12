@@ -1,4 +1,4 @@
-CountTarget=40
+CountTarget=35
 Speed=40
 Time=25
 
