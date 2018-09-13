@@ -47,6 +47,12 @@ void Target::onCollide(Bullet* bullet)
     if (m_hitHandler)
         m_hitHandler(killed, killed ? getKillPoints() : getHitPoints());
 
-    if (killed)
-        removeFromParent();
+    if (killed) {
+        setCollisionsEnabled(false);
+        setVelocity({0.0f, 0.0f});
+        getBackground()->stopAllActions();
+
+        const auto removeSelf = ActionFloat::create(0.0f, 0.0f, 0.0f, [this](auto) { removeFromParent(); });
+        getBackground()->runAction(Sequence::create(FadeOut::create(0.15f), removeSelf, nullptr));
+    }
 }

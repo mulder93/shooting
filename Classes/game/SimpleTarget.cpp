@@ -18,21 +18,21 @@ bool SimpleTarget::init(int baseSpeed, cocos2d::Rect worldBounds)
 
     setWorldBounds(std::move(worldBounds));
 
-    const auto image = createAnimatedImage();
-    addChild(image);
+    m_background = createAnimatedImage();
+    addChild(m_background);
 
     // Random position by X and Y.
-    const auto positionX = random(-150.0f, 200.0f);
+    const auto positionX = random(-300.0f, 400.0f);
     const auto positionY = random(getWorldBounds().getMinY(), getWorldBounds().getMaxY() - getContentSize().height);
     setPosition(positionX, positionY);
 
     // Random velocity by X and Y.
-    const auto velocityX = random(std::min(5.0f, baseSpeed - 10.0f), baseSpeed + 10.0f);
-    const auto velocityY = random(std::min(10.0f, baseSpeed - 15.0f), baseSpeed + 15.0f) * (rand_0_1() > 0.5f ? -1.0f : 1.0f);
+    const auto velocityX = random(std::min(10.0f, baseSpeed - 20.0f), baseSpeed + 20.0f);
+    const auto velocityY = random(std::min(20.0f, baseSpeed - 30.0f), baseSpeed + 30.0f) * (rand_0_1() > 0.5f ? -1.0f : 1.0f);
     setVelocity({velocityX, velocityY});
 
     setAnchorPoint({0.0f, 0.0f});
-    setContentSize(image->getContentSize());
+    setContentSize(m_background->getContentSize());
     return true;
 }
 
@@ -71,13 +71,13 @@ void SimpleTarget::update(float delta)
 {
     Target::update(delta);
 
-    if (getPositionY() <= getWorldBounds().getMinY() || getWorldBounds().getMaxY() <= getPositionY())
+    if (getPositionY() <= getWorldBounds().getMinY() || getWorldBounds().getMaxY() - getContentSize().height <= getPositionY())
         changeMovingDirection();
 }
 
 Rect SimpleTarget::getCollisionBox() const
 {
-    return Rect(getPosition() + Vec2{5.0f, 5.0f}, getContentSize() - Size{10.0f, 13.0f});
+    return Rect(getPosition() + Vec2{8.0f, 6.0f}, Size{34.0f, 30.0f});
 }
 
 void SimpleTarget::onCollide(PhysicsBody* collideBody)

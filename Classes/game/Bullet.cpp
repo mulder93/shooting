@@ -6,6 +6,7 @@
 //
 
 #include "Bullet.hpp"
+#include "Target.hpp"
 
 USING_NS_CC;
 
@@ -48,6 +49,8 @@ Rect Bullet::getCollisionBox() const
 
 void Bullet::onCollide(PhysicsBody* collideBody)
 {
-    // Bullet is destroyed after hitting another body.
-    removeFromParent();
+    if (dynamic_cast<Target*>(collideBody)) {
+        // Bullet is destroyed after hitting target.
+        removeFromParent();
+    }
 }

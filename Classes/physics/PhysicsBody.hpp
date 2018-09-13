@@ -22,6 +22,9 @@ public:
     const cocos2d::Vec2& getAcceleration() { return m_acceleration; }
     void setAcceleration(cocos2d::Vec2 acceleration) { m_acceleration = std::move(acceleration); }
 
+    bool areCollisionsEnabled() const { return m_collisionsEnabled; }
+    void setCollisionsEnabled(bool enabled) { m_collisionsEnabled = enabled; }
+
     virtual cocos2d::Rect getCollisionBox() const { return getBoundingBox(); }
 
     void setWorldBounds(cocos2d::Rect bounds) { m_worldBounds = std::move(bounds); }
@@ -35,4 +38,5 @@ private:
     cocos2d::Rect m_worldBounds;
     cocos2d::Vec2 m_velocity{0.0f, 0.0f};
     cocos2d::Vec2 m_acceleration{0.0f, 0.0f};
+    bool m_collisionsEnabled{true};
 };

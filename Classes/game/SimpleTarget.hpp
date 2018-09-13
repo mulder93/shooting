@@ -26,6 +26,7 @@ public:
 private:
     cocos2d::Node* createAnimatedImage();
 
+    cocos2d::Node* getBackground() const override { return m_background; }
     void onCollide(SimpleTarget* collideTarget);
 
     int getMaxHealth() override { return 1; }
@@ -33,4 +34,6 @@ private:
     int getKillPoints() override { return 7; }
 
     void changeMovingDirection();
+
+    cocos2d::Node* m_background;
 };

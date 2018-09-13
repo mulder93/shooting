@@ -18,6 +18,9 @@ void CollisionDetector::update(float delta)
         for (int j = i + 1; j < m_bodies.size(); ++j) {
             const auto firstBody = m_bodies.at(i);
             const auto secondBody = m_bodies.at(j);
+            if (!firstBody->areCollisionsEnabled() || !secondBody->areCollisionsEnabled())
+                continue;
+
             if (firstBody->getCollisionBox().intersectsRect(secondBody->getCollisionBox())) {
                 firstBody->onCollide(secondBody);
                 secondBody->onCollide(firstBody);

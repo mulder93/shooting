@@ -17,8 +17,8 @@ bool FastTarget::init(int baseSpeed, cocos2d::Rect worldBounds)
 
     setWorldBounds(std::move(worldBounds));
 
-    const auto image = createAnimatedImage();
-    addChild(image);
+    m_background = createAnimatedImage();
+    addChild(m_background);
 
     // Random position by Y and off-screen position by X.
     const auto positionY = random(getWorldBounds().getMinY(), getWorldBounds().getMaxY() - getContentSize().height);
@@ -29,7 +29,7 @@ bool FastTarget::init(int baseSpeed, cocos2d::Rect worldBounds)
     setVelocity({velocityX, 0.0f});
 
     setAnchorPoint({0.0f, 0.0f});
-    setContentSize(image->getContentSize());
+    setContentSize(m_background->getContentSize());
     return true;
 }
 
@@ -62,4 +62,9 @@ FastTarget* FastTarget::create(int baseSpeed, cocos2d::Rect worldBounds)
 FastTarget::~FastTarget()
 {
     log("Fast Target is destroyed");
+}
+
+Rect FastTarget::getCollisionBox() const
+{
+    return Rect(getPosition() + Vec2{12.0f, 11.0f}, Size{45.0f, 40.0f});
 }

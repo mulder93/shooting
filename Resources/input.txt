@@ -1,5 +1,5 @@
 CountTarget=35
-Speed=40
+Speed=80
 Time=25
 
 CountFastTargets=5

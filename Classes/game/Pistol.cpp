@@ -16,8 +16,8 @@ namespace
 {
     constexpr auto energyPerBullet = 15.0f;
     constexpr auto energyRestoringSpeed = 20.0f;
-    constexpr auto bulletStartVelocity = 300.0f;
-    constexpr auto gravity = -50.0f;
+    constexpr auto bulletStartVelocity = 600.0f;
+    constexpr auto gravity = -100.0f;
 }
 
 bool Pistol::init()
@@ -50,8 +50,8 @@ void Pistol::shoot()
         return;
     
     const auto bullet = Bullet::create();
-    bullet->setScale(2.0f);
-    bullet->setPosition({-4.0f, 23.0f});
+    bullet->setAnchorPoint({0.5f, 0.5f});
+    bullet->setPosition({-8.0f, 50.0f});
 
     const auto radiansRotation = radiansFromDegrees(getRotation());
     bullet->setVelocity({-bulletStartVelocity * std::cosf(radiansRotation), bulletStartVelocity * std::sinf(radiansRotation)});

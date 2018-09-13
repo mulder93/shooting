@@ -55,10 +55,10 @@
 		C615B8D921499B9000B973EE /* fly.plist in Resources */ = {isa = PBXBuildFile; fileRef = C615B8D621499B8F00B973EE /* fly.plist */; };
 		C615B8DA21499B9000B973EE /* fly.png in Resources */ = {isa = PBXBuildFile; fileRef = C615B8D721499B9000B973EE /* fly.png */; };
 		C615B8DB21499B9000B973EE /* fly.png in Resources */ = {isa = PBXBuildFile; fileRef = C615B8D721499B9000B973EE /* fly.png */; };
+		C615B8DD2149ABAF00B973EE /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = C615B8DC2149ABAE00B973EE /* background.png */; };
+		C615B8DE2149ABAF00B973EE /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = C615B8DC2149ABAE00B973EE /* background.png */; };
 		C6ADD267213BC28F002517E8 /* MainScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6ADD265213BC28F002517E8 /* MainScene.cpp */; };
 		C6ADD269213BC297002517E8 /* MainScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6ADD265213BC28F002517E8 /* MainScene.cpp */; };
-		C6ADD26B213BC809002517E8 /* background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C6ADD26A213BC809002517E8 /* background.jpg */; };
-		C6ADD26C213BC85D002517E8 /* background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C6ADD26A213BC809002517E8 /* background.jpg */; };
 		C6ADD26F213BCDB7002517E8 /* Target.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6ADD26D213BCDB7002517E8 /* Target.cpp */; };
 		C6ADD270213BCDB7002517E8 /* Target.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6ADD26D213BCDB7002517E8 /* Target.cpp */; };
 		C6ADD279213BD7A1002517E8 /* SimpleTarget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6ADD277213BD7A1002517E8 /* SimpleTarget.cpp */; };
@@ -179,9 +179,9 @@
 		C615B8D32148335100B973EE /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
 		C615B8D621499B8F00B973EE /* fly.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = fly.plist; sourceTree = "<group>"; };
 		C615B8D721499B9000B973EE /* fly.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fly.png; sourceTree = "<group>"; };
+		C615B8DC2149ABAE00B973EE /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
 		C6ADD265213BC28F002517E8 /* MainScene.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MainScene.cpp; sourceTree = "<group>"; };
 		C6ADD266213BC28F002517E8 /* MainScene.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MainScene.hpp; sourceTree = "<group>"; };
-		C6ADD26A213BC809002517E8 /* background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background.jpg; sourceTree = "<group>"; };
 		C6ADD26D213BCDB7002517E8 /* Target.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Target.cpp; sourceTree = "<group>"; };
 		C6ADD26E213BCDB7002517E8 /* Target.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Target.hpp; sourceTree = "<group>"; };
 		C6ADD277213BD7A1002517E8 /* SimpleTarget.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SimpleTarget.cpp; sourceTree = "<group>"; };
@@ -343,7 +343,7 @@
 				521A8EA819F11F5000D177D7 /* fonts */,
 				3EACC98E19EE6D4300EB3C5E /* res */,
 				46880B7619C43A67006E1F66 /* CloseNormal.png */,
-				C6ADD26A213BC809002517E8 /* background.jpg */,
+				C615B8DC2149ABAE00B973EE /* background.png */,
 				46880B7719C43A67006E1F66 /* CloseSelected.png */,
 				C615B8D621499B8F00B973EE /* fly.plist */,
 				C615B8D721499B9000B973EE /* fly.png */,
@@ -540,8 +540,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C6ADD26B213BC809002517E8 /* background.jpg in Resources */,
 				C615B8DA21499B9000B973EE /* fly.png in Resources */,
+				C615B8DD2149ABAF00B973EE /* background.png in Resources */,
 				C615B8D821499B9000B973EE /* fly.plist in Resources */,
 				C6ADD285214071E6002517E8 /* pistol.png in Resources */,
 				46880B8119C43A67006E1F66 /* HelloWorld.png in Resources */,
@@ -564,9 +564,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				C6ADD286214071E6002517E8 /* pistol.png in Resources */,
+				C615B8DE2149ABAF00B973EE /* background.png in Resources */,
 				46880B8219C43A67006E1F66 /* HelloWorld.png in Resources */,
 				503AE0F817EB97AB00D1A890 /* Icon.icns in Resources */,
-				C6ADD26C213BC85D002517E8 /* background.jpg in Resources */,
 				3EACC99019EE6D4300EB3C5E /* res in Resources */,
 				C6ADD2AB21440D91002517E8 /* bar.png in Resources */,
 				C615B8D52148335100B973EE /* input.txt in Resources */,

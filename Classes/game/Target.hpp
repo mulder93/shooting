@@ -25,6 +25,7 @@ public:
 
 private:
     void onCollide(Bullet* bullet);
+    virtual cocos2d::Node* getBackground() const = 0;
 
     virtual int getMaxHealth() = 0;
     virtual int getHitPoints() = 0;

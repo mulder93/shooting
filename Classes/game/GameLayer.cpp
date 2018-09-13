@@ -24,16 +24,21 @@ namespace
 
     auto createBackground()
     {
-        const auto background = Sprite::create("background.jpg");
-        background->setAnchorPoint({0.0f, 0.0f});
+        const auto background = Sprite::create("background.png");
+        background->setAnchorPoint({0.5f, 0.5f});
+
+        const auto screenSize = Director::getInstance()->getVisibleSize();
+        background->setPosition({screenSize.width * 0.5f, screenSize.height * 0.5f});
         return background;
     }
 
     auto createEnergyBar()
     {
         const auto bar = EnergyBar::create();
-        bar->setAnchorPoint({0.0f, 1.0f});
-        bar->setPosition({5.0f, Director::getInstance()->getVisibleSize().height - 5.0f});
+        bar->setAnchorPoint({1.0f, 1.0f});
+
+        const auto screenSize = Director::getInstance()->getVisibleSize();
+        bar->setPosition({screenSize.width - 5.0f, screenSize.height - 5.0f});
         return bar;
     }
 
@@ -48,28 +53,28 @@ namespace
 
     auto createHudLabel(float offsetX)
     {
-        const auto label = Label::createWithTTF("", "fonts/arial.ttf", 20.0f);
+        const auto label = Label::createWithTTF("", "fonts/arial.ttf", 40.0f);
         label->setAnchorPoint({0.0f, 1.0f});
 
         const auto screenSize = Director::getInstance()->getVisibleSize();
-        label->setPosition(Vec2(screenSize.width, screenSize.height) - Vec2(offsetX, 1.0f));
+        label->setPosition(Vec2(0.0f, screenSize.height) + Vec2(offsetX, -1.0f));
 
         return label;
     }
 
     auto createScoreLabel()
     {
-        return createHudLabel(100.0f);
+        return createHudLabel(20.0f);
     }
 
     auto createTimerLabel()
     {
-        return createHudLabel(200.0f);
+        return createHudLabel(260.0f);
     }
 
     auto createResultLabel()
     {
-        const auto label = Label::createWithTTF("", "fonts/arial.ttf", 30.0f);
+        const auto label = Label::createWithTTF("", "fonts/arial.ttf", 60.0f);
         label->setAnchorPoint({0.5f, 0.5f});
 
         const auto screenSize = Director::getInstance()->getVisibleSize();
@@ -84,7 +89,7 @@ namespace
     auto getWorldBounds()
     {
         const auto screenSize = Director::getInstance()->getVisibleSize();
-        return Rect(0.0f, 55.0f, screenSize.width, screenSize.height - 95.0f);
+        return Rect(0.0f, 120.0f, screenSize.width, screenSize.height - 120.0f);
     }
 
 #pragma mark -
