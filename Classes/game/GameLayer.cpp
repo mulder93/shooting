@@ -75,7 +75,7 @@ namespace
 
     auto createResultLabel()
     {
-        const auto label = Label::createWithTTF("", "fonts/arial.ttf", 60.0f);
+        const auto label = Label::createWithTTF("", "fonts/arial.ttf", 55.0f);
         label->setAnchorPoint({0.5f, 0.5f});
 
         const auto screenSize = Director::getInstance()->getVisibleSize();
@@ -182,6 +182,9 @@ void GameLayer::resetTargets()
 void GameLayer::addTarget(Target* target)
 {
     target->setHitHandler([this](bool killed, int points) {
+        if (killed) {
+            m_killedTargets++;
+        }
         m_score += points;
         updateScoreLabel();
     });
@@ -194,6 +197,7 @@ void GameLayer::addTarget(Target* target)
 
 void GameLayer::startGame()
 {
+    m_killedTargets = 0;
     m_score = 0;
     updateScoreLabel();
 
@@ -227,7 +231,8 @@ void GameLayer::updateTimerLabel()
 
 void GameLayer::showResults()
 {
-    m_resultLabel->setString(StringUtils::format("Final score: %d\nTap to restart", m_score));
+    const auto allTargetsCount = m_configuration.getTargetsCount() + m_configuration.getFastTargetsCount() + m_configuration.getWalkingTargetsCount();
+    m_resultLabel->setString(StringUtils::format("Targets beaten: %d/%d\nFinal score: %d\nTap to restart", m_killedTargets, allTargetsCount, m_score));
     m_resultLabel->setVisible(true);
 }
 

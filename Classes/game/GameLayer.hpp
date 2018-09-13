@@ -58,6 +58,7 @@ private:
     EnergyBar* m_energyBar = nullptr;
 
     int m_score;
+    int m_killedTargets;
     float m_timeLeft;
     bool m_playing = false;
 };
