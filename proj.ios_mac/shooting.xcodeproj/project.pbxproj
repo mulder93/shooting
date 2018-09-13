@@ -57,6 +57,8 @@
 		C615B8DB21499B9000B973EE /* fly.png in Resources */ = {isa = PBXBuildFile; fileRef = C615B8D721499B9000B973EE /* fly.png */; };
 		C615B8DD2149ABAF00B973EE /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = C615B8DC2149ABAE00B973EE /* background.png */; };
 		C615B8DE2149ABAF00B973EE /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = C615B8DC2149ABAE00B973EE /* background.png */; };
+		C615B8E1214AE3D900B973EE /* WalkingTarget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C615B8DF214AE3D900B973EE /* WalkingTarget.cpp */; };
+		C615B8E2214AE3D900B973EE /* WalkingTarget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C615B8DF214AE3D900B973EE /* WalkingTarget.cpp */; };
 		C6ADD267213BC28F002517E8 /* MainScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6ADD265213BC28F002517E8 /* MainScene.cpp */; };
 		C6ADD269213BC297002517E8 /* MainScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6ADD265213BC28F002517E8 /* MainScene.cpp */; };
 		C6ADD26F213BCDB7002517E8 /* Target.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6ADD26D213BCDB7002517E8 /* Target.cpp */; };
@@ -180,6 +182,8 @@
 		C615B8D621499B8F00B973EE /* fly.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = fly.plist; sourceTree = "<group>"; };
 		C615B8D721499B9000B973EE /* fly.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fly.png; sourceTree = "<group>"; };
 		C615B8DC2149ABAE00B973EE /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
+		C615B8DF214AE3D900B973EE /* WalkingTarget.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = WalkingTarget.cpp; sourceTree = "<group>"; };
+		C615B8E0214AE3D900B973EE /* WalkingTarget.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = WalkingTarget.hpp; sourceTree = "<group>"; };
 		C6ADD265213BC28F002517E8 /* MainScene.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MainScene.cpp; sourceTree = "<group>"; };
 		C6ADD266213BC28F002517E8 /* MainScene.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MainScene.hpp; sourceTree = "<group>"; };
 		C6ADD26D213BCDB7002517E8 /* Target.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Target.cpp; sourceTree = "<group>"; };
@@ -408,6 +412,8 @@
 				C6ADD28C214077E6002517E8 /* Bullet.hpp */,
 				C6ADD29C2143E92E002517E8 /* FastTarget.cpp */,
 				C6ADD29D2143E92E002517E8 /* FastTarget.hpp */,
+				C615B8DF214AE3D900B973EE /* WalkingTarget.cpp */,
+				C615B8E0214AE3D900B973EE /* WalkingTarget.hpp */,
 				C6ADD2BB2146F5A5002517E8 /* EnergyBar.cpp */,
 				C6ADD2BC2146F5A5002517E8 /* EnergyBar.hpp */,
 			);
@@ -593,6 +599,7 @@
 				C6ADD279213BD7A1002517E8 /* SimpleTarget.cpp in Sources */,
 				C6ADD2B121455AC9002517E8 /* EventListenerHolder.cpp in Sources */,
 				46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */,
+				C615B8E1214AE3D900B973EE /* WalkingTarget.cpp in Sources */,
 				C6ADD282213DC17C002517E8 /* CollisionDetector.cpp in Sources */,
 				1AF87B8A1F6F7822007BE51C /* main.m in Sources */,
 				C615B8D0214832DF00B973EE /* Configuration.cpp in Sources */,
@@ -617,6 +624,7 @@
 				46880B8919C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				C6ADD269213BC297002517E8 /* MainScene.cpp in Sources */,
 				C6ADD270213BCDB7002517E8 /* Target.cpp in Sources */,
+				C615B8E2214AE3D900B973EE /* WalkingTarget.cpp in Sources */,
 				C6ADD2B221455AC9002517E8 /* EventListenerHolder.cpp in Sources */,
 				C615B8D1214832DF00B973EE /* Configuration.cpp in Sources */,
 				C6ADD28E214077E6002517E8 /* Bullet.cpp in Sources */,

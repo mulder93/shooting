@@ -3,3 +3,4 @@ Speed=80
 Time=25
 
 CountFastTargets=5
+CountWalkingTargets=2

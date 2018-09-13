@@ -16,6 +16,7 @@ public:
 
     int getTargetsCount() { return m_targetsCount; }
     int getFastTargetsCount() { return m_fastTargetsCount; }
+    int getWalkingTargetsCount() { return m_walkingTargetsCount; }
     int getSpeed() { return m_speed; }
     int getTime() { return m_time; }
 
@@ -26,6 +27,7 @@ private:
 
     int m_targetsCount;
     int m_fastTargetsCount;
+    int m_walkingTargetsCount;
     int m_speed;
     int m_time;
 };

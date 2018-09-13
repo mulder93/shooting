@@ -9,6 +9,7 @@
 #include <cmath>
 #include "SimpleTarget.hpp"
 #include "FastTarget.hpp"
+#include "WalkingTarget.hpp"
 #include "Pistol.hpp"
 #include "Bullet.hpp"
 #include "EnergyBar.hpp"
@@ -165,6 +166,13 @@ void GameLayer::resetTargets()
         m_targetsHolder->scheduleOnce([this](float) {
             addTarget(FastTarget::create(m_configuration.getSpeed(), getWorldBounds()));
         }, random(0.0f, m_timeLeft - 2.0f), scheduleKey);
+    }
+
+    for (auto i = 0; i < m_configuration.getWalkingTargetsCount(); ++i) {
+        const auto scheduleKey = StringUtils::format("walking_target_%d", i);
+        m_targetsHolder->scheduleOnce([this](float) {
+            addTarget(WalkingTarget::create(m_configuration.getSpeed(), getWorldBounds()));
+        }, random(0.0f, m_timeLeft - 15.0f), scheduleKey);
     }
 }
 

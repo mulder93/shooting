@@ -59,6 +59,7 @@ Configuration::Configuration()
 
     m_targetsCount = getFileValue("CountTarget", 10);
     m_fastTargetsCount = getFileValue("CountFastTargets", 5);
+    m_walkingTargetsCount = getFileValue("CountWalkingTargets", 1);
     m_speed = getFileValue("Speed", 50);
     m_time = getFileValue("Time", 50);
 }

@@ -10,6 +10,11 @@
 
 USING_NS_CC;
 
+namespace
+{
+    const Color3B hitColor{77, 174, 216};
+}
+
 bool Target::init()
 {
     if (!PhysicsBody::init())
@@ -53,6 +58,11 @@ void Target::onCollide(Bullet* bullet)
         getBackground()->stopAllActions();
 
         const auto removeSelf = ActionFloat::create(0.0f, 0.0f, 0.0f, [this](auto) { removeFromParent(); });
-        getBackground()->runAction(Sequence::create(FadeOut::create(0.15f), removeSelf, nullptr));
+        const auto hit = Spawn::create(TintTo::create(0.05f, hitColor), FadeOut::create(0.15f), nullptr);
+        getBackground()->runAction(Sequence::create(hit, removeSelf, nullptr));
+    } else {
+        const auto hit = Spawn::create(TintTo::create(0.05f, hitColor), ScaleTo::create(0.05f, 1.15f), nullptr);
+        const auto normal = Spawn::create(ScaleTo::create(0.05f, 1.0f),TintTo::create(0.05f, Color3B::WHITE), nullptr);
+        getBackground()->runAction(Sequence::create(hit, normal, nullptr));
     }
 }
