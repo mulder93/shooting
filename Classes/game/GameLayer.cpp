@@ -157,10 +157,12 @@ void GameLayer::resetTargets()
 {
     m_targetsHolder->removeAllChildrenWithCleanup(true);
 
+    // Create all simple targets right now.
     for (auto i = 0; i < m_configuration.getTargetsCount(); ++i) {
         addTarget(SimpleTarget::create(m_configuration.getSpeed(), getWorldBounds()));
     }
 
+    // Create fast targets randomly during game time (but not very close to the end game).
     for (auto i = 0; i < m_configuration.getFastTargetsCount(); ++i) {
         const auto scheduleKey = StringUtils::format("fast_target_%d", i);
         m_targetsHolder->scheduleOnce([this](float) {
@@ -168,6 +170,7 @@ void GameLayer::resetTargets()
         }, random(0.0f, m_timeLeft - 2.0f), scheduleKey);
     }
 
+    // Create walking targets randomly during game time (but not very close to the end game).
     for (auto i = 0; i < m_configuration.getWalkingTargetsCount(); ++i) {
         const auto scheduleKey = StringUtils::format("walking_target_%d", i);
         m_targetsHolder->scheduleOnce([this](float) {
@@ -293,5 +296,6 @@ void GameLayer::rotatePistol(const Vec2& inputPosition)
 
     const auto delta = m_pistol->getPosition() - inputPosition;
     const auto angle = degreesFromRadians(-std::atanf(delta.y / delta.x));
-    m_pistol->setRotation(clampf(angle, -60.0f, 60.0f));
+    static auto maxAngle = 60.0f;
+    m_pistol->setRotation(clampf(angle, -maxAngle, maxAngle));
 }
